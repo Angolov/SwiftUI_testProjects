@@ -58,7 +58,7 @@ struct GameView: View {
                 .frame(width: screen.width / 2.2, height: screen.width / 2.2)
                 .background(Color("FirstPlayer"))
                 .cornerRadius(26)
-                .shadow(color: viewModel.isFirstPlayerMove ? .red : .clear,
+                .shadow(color: viewModel.isFirstPlayerTurn ? .red : .clear,
                         radius: 4,
                         x: 0,
                         y: 0)
@@ -76,7 +76,7 @@ struct GameView: View {
                 .frame(width: screen.width / 2.2, height: screen.width / 2.2)
                 .background(Color("SecondPlayer"))
                 .cornerRadius(26)
-                .shadow(color: viewModel.isFirstPlayerMove ? .clear : .purple,
+                .shadow(color: viewModel.isFirstPlayerTurn ? .clear : .purple,
                         radius: 4,
                         x: 0,
                         y: 0)
@@ -87,10 +87,11 @@ struct GameView: View {
             
             Button {
                 
-                var score = 0
+                print("Ready button tapped")
                 
                 do {
-                    try score = viewModel.check(word: playerWord)
+                    try viewModel.finalizeTurnWith(word: playerWord)
+                    playerWord = ""
                 }
                 catch (let error) {
                     if let error = error as? WordError {
@@ -101,10 +102,6 @@ struct GameView: View {
                     showAlertMessage = true
                 }
                 
-                print("Ready button tapped")
-                if score > 0 {
-                    playerWord = ""
-                }
             } label: {
                 Text("Готово")
                     .padding(12)

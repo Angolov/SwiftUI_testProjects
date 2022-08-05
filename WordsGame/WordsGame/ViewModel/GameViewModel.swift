@@ -7,37 +7,20 @@
 
 import Foundation
 
-enum WordError: Error {
-    
-    case wordIsTheSame
-    case wordIsTooShort
-    case wordWasAlreadyUsed
-    case cannotCreateWord
-    case undefinedError
-    
-    var description: String {
-        switch self {
-        case .wordIsTheSame:
-            return "Это изначальное слово"
-        case .wordIsTooShort:
-            return "Ваше слово слишком короткое"
-        case .wordWasAlreadyUsed:
-            return "Это слово уже было использовано"
-        case .cannotCreateWord:
-            return "Невозможно составить слово"
-        case .undefinedError:
-            return "Неизвестная ошибка"
-        }
-    }
-}
+// MARK: - GameViewModel class
 
 class GameViewModel: ObservableObject {
     
-    @Published var firstPlayer: Player
-    @Published var secondPlayer: Player
-    @Published var words = [String]()
+    // MARK: - Properties
+    
+    @Published private(set) var firstPlayer: Player
+    @Published private(set) var secondPlayer: Player
+    @Published private(set) var words = [String]()
+    private(set) var isFirstPlayerTurn = true
+    
     let originalWord: String
-    var isFirstPlayerMove = true
+    
+    // MARK: - Initializer
     
     init(firstPlayer: Player, secondPlayer: Player, originalWord: String) {
         self.firstPlayer = firstPlayer
@@ -45,81 +28,100 @@ class GameViewModel: ObservableObject {
         self.originalWord = originalWord.lowercased()
     }
     
-    func validatePlayerWord(_ word: String) throws {
-        let word = word.lowercased()
-        guard word != self.originalWord else {
-            print("Error! It is the original word.")
+    // MARK: - Public methods
+    
+    func finalizeTurnWith(word: String) throws {
+        
+        let playerWord = word.lowercased()
+        var playerScore = 0
+        
+        do {
+            try validatePlayerWord(playerWord)
+            try playerScore = countScoreFor(word: playerWord)
+            words.append(playerWord)
+            addPlayerScore(score: playerScore)
+            switchTurn()
+        }
+        catch {
+            throw error
+        }
+    }
+}
+
+// MARK: - Private methods
+
+private extension GameViewModel {
+    
+    private func validatePlayerWord(_ word: String) throws {
+        if isSameWithOriginal(word) {
             throw WordError.wordIsTheSame
         }
         
-        guard !(words.contains(word)) else {
-            print("Error! This word was already used.")
+        if isAlreadyUsed(word) {
             throw WordError.wordWasAlreadyUsed
         }
         
-        guard word.count > 1 else {
-            print("Error! Your word is to short.")
+        if isTooShort(word) {
             throw WordError.wordIsTooShort
         }
     }
     
-    func wordToChars(word: String) -> [Character] {
+    private func isSameWithOriginal(_ word: String) -> Bool {
+        return word == originalWord
+    }
+    
+    private func isAlreadyUsed(_ word: String) -> Bool {
+        return words.contains(word)
+    }
+    
+    private func isTooShort(_ word: String) -> Bool {
+        return word.count <= 1
+    }
+    
+    private func countScoreFor(word: String) throws -> Int {
+        var originalWordArray = wordToChars(word: originalWord)
+        let playerWordArray = wordToChars(word: word)
+        var score = 0
         
+        for char in playerWordArray {
+            
+            if originalWordArray.contains(char),
+               let charIndex = originalWordArray.firstIndex(of: char) {
+                
+                originalWordArray.remove(at: charIndex)
+                score += 1
+            
+            } else {
+                throw WordError.cannotCreateWord
+            }
+        }
+        
+        guard score != word.count else {
+            throw WordError.undefinedError
+        }
+        
+        return score
+    }
+    
+    private func wordToChars(word: String) -> [Character] {
         var chars = [Character]()
         
-        for char in word.lowercased() {
+        for char in word {
             chars.append(char)
         }
         
         return chars
     }
     
-    func check(word: String) throws -> Int {
-        
-        do {
-            try self.validatePlayerWord(word)
-        }
-        catch {
-            throw error
-        }
-        
-        var originalWordArray = wordToChars(word: self.originalWord)
-        let playerWordArray = wordToChars(word: word)
-        var result = ""
-        
-        for char in playerWordArray {
-            if originalWordArray.contains(char) {
-                result.append(char)
-                
-                var i = 0
-                
-                while originalWordArray[i] != char {
-                    i += 1
-                }
-                
-                originalWordArray.remove(at: i)
-                
-            } else {
-                print("Error! Your word cannot be created.")
-                throw WordError.cannotCreateWord
-            }
-        }
-        
-        guard result == word.lowercased() else {
-            print("Error! Unknown error")
-            throw WordError.undefinedError
-        }
-        
-        words.append(result)
-        
-        if isFirstPlayerMove {
-            firstPlayer.add(score: result.count)
+    private func addPlayerScore(score: Int) {
+        if isFirstPlayerTurn {
+            firstPlayer.add(score: score)
         } else {
-            secondPlayer.add(score: result.count)
+            secondPlayer.add(score: score)
         }
-        
-        isFirstPlayerMove.toggle()
-        
-        return result.count
+    }
+    
+    private func switchTurn() {
+        isFirstPlayerTurn.toggle()
     }
 }
