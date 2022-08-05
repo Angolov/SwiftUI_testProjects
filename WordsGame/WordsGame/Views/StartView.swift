@@ -27,51 +27,54 @@ struct StartView: View {
                 .padding(.top, 32)
             
             WordTextField(word: $firstPlayerName, placeholder: "Игрок 1")
-                .cornerRadius(12)
                 .padding(.horizontal, 20)
             
             WordTextField(word: $secondPlayerName, placeholder: "Игрок 2")
-                .cornerRadius(12)
                 .padding(.horizontal, 20)
             
-            Button {
-                print("Start button tapped")
+            startButton
+                .padding(.top)
                 
-                if originalWord.count > 7 {
-                    showGameView.toggle()
-                } else {
-                    showAlert = true
-                }
-                
-            } label: {
-                Text("Старт")
-                    .font(.custom("AvenirNext-Bold", size: 30))
-                    .foregroundColor(.white)
-                    .padding()
-                    .padding(.horizontal, 64)
-                    .background(Color("FirstPlayer"))
-                    .cornerRadius(12)
-                    .padding(.top)
-            }
         }
         .background(Image("background"))
         .fullScreenCover(isPresented: $showGameView) {
-            
-            let name1 = firstPlayerName == "" ? "Игрок 1" : firstPlayerName
-            let name2 = secondPlayerName == "" ? "Игрок 2" : secondPlayerName
-            
-            let firstPlayer = Player(name: name1)
-            let secondPlayer = Player(name: name2)
-            
-            let gameViewModel = GameViewModel(firstPlayer: firstPlayer,
-                                              secondPlayer: secondPlayer,
-                                              originalWord: originalWord)
-            
-            GameView(viewModel: gameViewModel)
+            goToGameView()
         }
         .alert("Ваше слово слишком короткое!", isPresented: $showAlert) {
             Text("ОК")
         }
+    }
+    
+    var startButton: some View {
+        Button {
+            if originalWord.count > 7 {
+                showGameView.toggle()
+            } else {
+                showAlert = true
+            }
+        } label: {
+            Text("Старт")
+                .font(.custom("AvenirNext-Bold", size: 30))
+                .foregroundColor(.white)
+                .padding()
+                .padding(.horizontal, 64)
+                .background(Color("FirstPlayer"))
+                .cornerRadius(12)
+        }
+    }
+    
+    private func goToGameView() -> some View {
+        let name1 = firstPlayerName == "" ? "Игрок 1" : firstPlayerName
+        let name2 = secondPlayerName == "" ? "Игрок 2" : secondPlayerName
+        
+        let firstPlayer = Player(name: name1)
+        let secondPlayer = Player(name: name2)
+        
+        let gameViewModel = GameViewModel(firstPlayer: firstPlayer,
+                                          secondPlayer: secondPlayer,
+                                          originalWord: originalWord)
+        
+        return GameView(viewModel: gameViewModel)
     }
 }
 
