@@ -38,7 +38,8 @@ class GameViewModel: ObservableObject {
         do {
             try validatePlayerWord(playerWord)
             try playerScore = countScoreFor(word: playerWord)
-            words.append(playerWord)
+            words.insert(playerWord, at: 0)
+            //words.append(playerWord)
             addPlayerScore(score: playerScore)
             switchTurn()
         }
@@ -50,7 +51,7 @@ class GameViewModel: ObservableObject {
 
 // MARK: - Private methods
 
-private extension GameViewModel {
+extension GameViewModel {
     
     private func validatePlayerWord(_ word: String) throws {
         if isSameWithOriginal(word) {
@@ -96,7 +97,7 @@ private extension GameViewModel {
             }
         }
         
-        guard score != word.count else {
+        guard score == word.count else {
             throw WordError.undefinedError
         }
         

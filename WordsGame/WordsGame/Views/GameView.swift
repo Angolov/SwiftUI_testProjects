@@ -71,7 +71,6 @@ extension GameView {
     
     private var exitButton: some View {
         Button {
-            print("Quit button tapped")
             showConfirmDialog = true
         } label: {
             Text("Выход")

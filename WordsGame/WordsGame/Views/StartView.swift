@@ -38,14 +38,17 @@ struct StartView: View {
         }
         .background(Image("background"))
         .fullScreenCover(isPresented: $showGameView) {
-            goToGameView()
+            prepareAndReturnGameView()
         }
         .alert("Ваше слово слишком короткое!", isPresented: $showAlert) {
             Text("ОК")
         }
     }
+}
+
+extension StartView {
     
-    var startButton: some View {
+    private var startButton: some View {
         Button {
             if originalWord.count > 7 {
                 showGameView.toggle()
@@ -63,7 +66,7 @@ struct StartView: View {
         }
     }
     
-    private func goToGameView() -> some View {
+    private func prepareAndReturnGameView() -> some View {
         let name1 = firstPlayerName == "" ? "Игрок 1" : firstPlayerName
         let name2 = secondPlayerName == "" ? "Игрок 2" : secondPlayerName
         

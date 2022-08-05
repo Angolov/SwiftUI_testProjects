@@ -18,6 +18,7 @@
 		5B4F47E4289D2093003956A4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47E3289D2093003956A4 /* GameViewModel.swift */; };
 		5B4F47E7289D342E003956A4 /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47E6289D342E003956A4 /* WordCell.swift */; };
 		5B8FDD8F289D541A00FB72DC /* WordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FDD8E289D541A00FB72DC /* WordError.swift */; };
+		5B8FDD91289D5FAB00FB72DC /* PlayerScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FDD90289D5FAB00FB72DC /* PlayerScoreLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		5B4F47E3289D2093003956A4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		5B4F47E6289D342E003956A4 /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 		5B8FDD8E289D541A00FB72DC /* WordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordError.swift; sourceTree = "<group>"; };
+		5B8FDD90289D5FAB00FB72DC /* PlayerScoreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScoreLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				5B4F47D9289D0D6F003956A4 /* TitleText.swift */,
 				5B4F47DB289D0DFD003956A4 /* WordTextField.swift */,
+				5B8FDD90289D5FAB00FB72DC /* PlayerScoreLabel.swift */,
 				5B4F47E6289D342E003956A4 /* WordCell.swift */,
 			);
 			path = Components;
@@ -196,6 +199,7 @@
 				5B4F47DC289D0DFD003956A4 /* WordTextField.swift in Sources */,
 				5B4F47E1289D1FF0003956A4 /* Player.swift in Sources */,
 				5B4F47E7289D342E003956A4 /* WordCell.swift in Sources */,
+				5B8FDD91289D5FAB00FB72DC /* PlayerScoreLabel.swift in Sources */,
 				5B4F47DE289D10A4003956A4 /* GameView.swift in Sources */,
 				5B4F47E4289D2093003956A4 /* GameViewModel.swift in Sources */,
 				5B8FDD8F289D541A00FB72DC /* WordError.swift in Sources */,
