@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		5B4F47CB289D040F003956A4 /* WordsGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47CA289D040F003956A4 /* WordsGameApp.swift */; };
-		5B4F47CD289D040F003956A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47CC289D040F003956A4 /* ContentView.swift */; };
+		5B4F47CD289D040F003956A4 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47CC289D040F003956A4 /* StartView.swift */; };
 		5B4F47CF289D0411003956A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F47CE289D0411003956A4 /* Assets.xcassets */; };
 		5B4F47D2289D0411003956A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B4F47D1289D0411003956A4 /* Preview Assets.xcassets */; };
+		5B4F47DA289D0D6F003956A4 /* TitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47D9289D0D6F003956A4 /* TitleText.swift */; };
+		5B4F47DC289D0DFD003956A4 /* WordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47DB289D0DFD003956A4 /* WordTextField.swift */; };
+		5B4F47DE289D10A4003956A4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47DD289D10A4003956A4 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5B4F47C7289D040F003956A4 /* WordsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B4F47CA289D040F003956A4 /* WordsGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsGameApp.swift; sourceTree = "<group>"; };
-		5B4F47CC289D040F003956A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5B4F47CC289D040F003956A4 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		5B4F47CE289D0411003956A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B4F47D1289D0411003956A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5B4F47D9289D0D6F003956A4 /* TitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleText.swift; sourceTree = "<group>"; };
+		5B4F47DB289D0DFD003956A4 /* WordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordTextField.swift; sourceTree = "<group>"; };
+		5B4F47DD289D10A4003956A4 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				5B4F47CA289D040F003956A4 /* WordsGameApp.swift */,
-				5B4F47CC289D040F003956A4 /* ContentView.swift */,
+				5B4F47DF289D10A8003956A4 /* Views */,
+				5B4F47D8289D0D43003956A4 /* Components */,
 				5B4F47CE289D0411003956A4 /* Assets.xcassets */,
 				5B4F47D0289D0411003956A4 /* Preview Content */,
 			);
@@ -65,6 +72,24 @@
 				5B4F47D1289D0411003956A4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5B4F47D8289D0D43003956A4 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5B4F47D9289D0D6F003956A4 /* TitleText.swift */,
+				5B4F47DB289D0DFD003956A4 /* WordTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5B4F47DF289D10A8003956A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B4F47CC289D040F003956A4 /* StartView.swift */,
+				5B4F47DD289D10A4003956A4 /* GameView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +162,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B4F47CD289D040F003956A4 /* ContentView.swift in Sources */,
+				5B4F47CD289D040F003956A4 /* StartView.swift in Sources */,
+				5B4F47DA289D0D6F003956A4 /* TitleText.swift in Sources */,
 				5B4F47CB289D040F003956A4 /* WordsGameApp.swift in Sources */,
+				5B4F47DC289D0DFD003956A4 /* WordTextField.swift in Sources */,
+				5B4F47DE289D10A4003956A4 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,8 +301,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -284,7 +314,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,8 +332,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +345,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

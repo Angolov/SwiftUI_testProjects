@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GameView.swift
 //  WordsGame
 //
 //  Created by Антон Головатый on 05.08.2022.
@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        GameView()
     }
 }
