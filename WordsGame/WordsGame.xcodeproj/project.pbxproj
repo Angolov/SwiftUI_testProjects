@@ -16,6 +16,7 @@
 		5B4F47DE289D10A4003956A4 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47DD289D10A4003956A4 /* GameView.swift */; };
 		5B4F47E1289D1FF0003956A4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47E0289D1FF0003956A4 /* Player.swift */; };
 		5B4F47E4289D2093003956A4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47E3289D2093003956A4 /* GameViewModel.swift */; };
+		5B4F47E7289D342E003956A4 /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4F47E6289D342E003956A4 /* WordCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		5B4F47DD289D10A4003956A4 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		5B4F47E0289D1FF0003956A4 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5B4F47E3289D2093003956A4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		5B4F47E6289D342E003956A4 /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				5B4F47D9289D0D6F003956A4 /* TitleText.swift */,
 				5B4F47DB289D0DFD003956A4 /* WordTextField.swift */,
+				5B4F47E6289D342E003956A4 /* WordCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				5B4F47CB289D040F003956A4 /* WordsGameApp.swift in Sources */,
 				5B4F47DC289D0DFD003956A4 /* WordTextField.swift in Sources */,
 				5B4F47E1289D1FF0003956A4 /* Player.swift in Sources */,
+				5B4F47E7289D342E003956A4 /* WordCell.swift in Sources */,
 				5B4F47DE289D10A4003956A4 /* GameView.swift in Sources */,
 				5B4F47E4289D2093003956A4 /* GameViewModel.swift in Sources */,
 			);

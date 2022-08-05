@@ -11,6 +11,11 @@ struct GameView: View {
     
     @State private var playerWord = ""
     @ObservedObject var viewModel: GameViewModel
+    @State private var showConfirmDialog = false
+    @State private var showAlertMessage = false
+    @State private var alertText = ""
+    
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         
@@ -19,6 +24,7 @@ struct GameView: View {
             HStack {
                 Button {
                     print("Quit button tapped")
+                    showConfirmDialog = true
                 } label: {
                     Text("Выход")
                         .padding(6)
@@ -52,7 +58,7 @@ struct GameView: View {
                 .frame(width: screen.width / 2.2, height: screen.width / 2.2)
                 .background(Color("FirstPlayer"))
                 .cornerRadius(26)
-                .shadow(color: .red,
+                .shadow(color: viewModel.isFirstPlayerMove ? .red : .clear,
                         radius: 4,
                         x: 0,
                         y: 0)
@@ -70,7 +76,7 @@ struct GameView: View {
                 .frame(width: screen.width / 2.2, height: screen.width / 2.2)
                 .background(Color("SecondPlayer"))
                 .cornerRadius(26)
-                .shadow(color: .purple,
+                .shadow(color: viewModel.isFirstPlayerMove ? .clear : .purple,
                         radius: 4,
                         x: 0,
                         y: 0)
@@ -80,7 +86,21 @@ struct GameView: View {
                 .padding(.horizontal)
             
             Button {
-                let score = viewModel.check(word: playerWord)
+                
+                var score = 0
+                
+                do {
+                    try score = viewModel.check(word: playerWord)
+                }
+                catch (let error) {
+                    if let error = error as? WordError {
+                        alertText = error.description
+                    } else {
+                        alertText = "Что-то пошло совсем не так..."
+                    }
+                    showAlertMessage = true
+                }
+                
                 print("Ready button tapped")
                 if score > 0 {
                     playerWord = ""
@@ -97,13 +117,37 @@ struct GameView: View {
             }
             
             List {
-                
+                ForEach(0 ..< self.viewModel.words.count, id: \.description) { item in
+                    WordCell(word: self.viewModel.words[item])
+                        .background(item % 2 == 0 ? Color("FirstPlayer") : Color("SecondPlayer"))
+                        .listRowInsets(EdgeInsets())
+                }
             }
             .listStyle(.plain)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
         }
         .background(Image("background"))
+        .confirmationDialog("Вы уверены, что хотите завершить игру?",
+                            isPresented: $showConfirmDialog, titleVisibility: .visible) {
+            Button(role: .destructive) {
+                self.dismiss()
+            } label: {
+                Text("Да")
+            }
+            
+            Button(role: .cancel) {} label: {
+                Text("Нет")
+            }
+        }
+        .alert("Произошла ошибка", isPresented: $showAlertMessage) {
+            Button(action: {}) {
+                Text("Ок, понял...")
+            }
+        } message: {
+            Text(alertText)
+        }
+
     }
 }
 

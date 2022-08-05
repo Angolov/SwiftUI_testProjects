@@ -14,6 +14,7 @@ struct StartView: View {
     @State private var secondPlayerName = ""
     
     @State private var showGameView = false
+    @State private var showAlert = false
     
     var body: some View {
         
@@ -35,7 +36,13 @@ struct StartView: View {
             
             Button {
                 print("Start button tapped")
-                showGameView.toggle()
+                
+                if originalWord.count > 7 {
+                    showGameView.toggle()
+                } else {
+                    showAlert = true
+                }
+                
             } label: {
                 Text("Старт")
                     .font(.custom("AvenirNext-Bold", size: 30))
@@ -50,14 +57,20 @@ struct StartView: View {
         .background(Image("background"))
         .fullScreenCover(isPresented: $showGameView) {
             
-            let firstPlayer = Player(name: firstPlayerName)
-            let secondPlayer = Player(name: secondPlayerName)
+            let name1 = firstPlayerName == "" ? "Игрок 1" : firstPlayerName
+            let name2 = secondPlayerName == "" ? "Игрок 2" : secondPlayerName
+            
+            let firstPlayer = Player(name: name1)
+            let secondPlayer = Player(name: name2)
             
             let gameViewModel = GameViewModel(firstPlayer: firstPlayer,
                                               secondPlayer: secondPlayer,
                                               originalWord: originalWord)
             
             GameView(viewModel: gameViewModel)
+        }
+        .alert("Ваше слово слишком короткое!", isPresented: $showAlert) {
+            Text("ОК")
         }
     }
 }
