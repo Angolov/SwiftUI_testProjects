@@ -13,6 +13,10 @@
 		5B8FDDAA28A0310700FB72DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA928A0310700FB72DC /* Preview Assets.xcassets */; };
 		5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC028A1262800578C60 /* EmailField.swift */; };
 		5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC228A1265300578C60 /* PasswordField.swift */; };
+		5BEAD01128A13908004FDF4D /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01028A13908004FDF4D /* MainTabBar.swift */; };
+		5BEAD01328A13B1F004FDF4D /* CatalogueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01228A13B1F004FDF4D /* CatalogueView.swift */; };
+		5BEAD01528A13B71004FDF4D /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01428A13B71004FDF4D /* CartView.swift */; };
+		5BEAD01728A13B8A004FDF4D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01628A13B8A004FDF4D /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		5B8FDDA928A0310700FB72DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5BB1EEC028A1262800578C60 /* EmailField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailField.swift; sourceTree = "<group>"; };
 		5BB1EEC228A1265300578C60 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		5BEAD01028A13908004FDF4D /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
+		5BEAD01228A13B1F004FDF4D /* CatalogueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueView.swift; sourceTree = "<group>"; };
+		5BEAD01428A13B71004FDF4D /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		5BEAD01628A13B8A004FDF4D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +82,12 @@
 		5BB1EEBE28A1260D00578C60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5BB1EEBF28A1261900578C60 /* Components */,
 				5B8FDDA428A0310500FB72DC /* AuthView.swift */,
+				5BEAD01028A13908004FDF4D /* MainTabBar.swift */,
+				5BEAD01228A13B1F004FDF4D /* CatalogueView.swift */,
+				5BEAD01428A13B71004FDF4D /* CartView.swift */,
+				5BEAD01628A13B8A004FDF4D /* ProfileView.swift */,
+				5BB1EEBF28A1261900578C60 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,10 +171,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BEAD01728A13B8A004FDF4D /* ProfileView.swift in Sources */,
 				5B8FDDA528A0310500FB72DC /* AuthView.swift in Sources */,
+				5BEAD01528A13B71004FDF4D /* CartView.swift in Sources */,
 				5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */,
 				5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */,
+				5BEAD01128A13908004FDF4D /* MainTabBar.swift in Sources */,
 				5B8FDDA328A0310500FB72DC /* FoodDeliveryApp.swift in Sources */,
+				5BEAD01328A13B1F004FDF4D /* CatalogueView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

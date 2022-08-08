@@ -17,6 +17,7 @@ struct AuthView: View {
     @State private var userPassword = ""
     @State private var confirmPassword = ""
     @State private var showRegistrationForm = false
+    @State private var showTabView = false
     
     // MARK: - Body
     
@@ -30,14 +31,12 @@ struct AuthView: View {
                     .padding(8)
                     .padding(.horizontal, 12)
                 
-                PasswordField(placeholder: "Введите пароль",
-                              text: $userPassword)
+                PasswordField(placeholder: "Введите пароль", text: $userPassword)
                     .padding(8)
                     .padding(.horizontal, 12)
                 
                 if showRegistrationForm {
-                    PasswordField(placeholder: "Повторите пароль",
-                                  text: $confirmPassword)
+                    PasswordField(placeholder: "Повторите пароль", text: $confirmPassword)
                         .padding(8)
                         .padding(.horizontal, 12)
                 }
@@ -59,6 +58,9 @@ struct AuthView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(backgroundImage)
         .animation(Animation.easeInOut(duration: 0.3), value: showRegistrationForm)
+        .fullScreenCover(isPresented: $showTabView) {
+            MainTabBar()
+        }
     }
 }
 
@@ -138,10 +140,21 @@ extension AuthView {
     
     private func registerUser() {
         // Some process for user registration
+        
+        cleanTextFields()
+        showRegistrationForm = false
+    }
+    
+    private func cleanTextFields() {
+        userLogin = ""
+        userPassword = ""
+        confirmPassword = ""
     }
     
     private func loginWithUser() {
         // Some process for user login
+        
+        showTabView = true
     }
 }
 
