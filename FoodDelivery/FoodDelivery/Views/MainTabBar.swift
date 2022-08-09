@@ -21,7 +21,7 @@ struct MainTabBar: View {
                 }
             }
             
-            CartView()
+            CartView(viewModel: CartViewModel.shared)
                 .tabItem {
                     VStack {
                         Image(systemName: "cart")

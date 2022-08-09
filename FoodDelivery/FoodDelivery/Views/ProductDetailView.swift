@@ -13,6 +13,8 @@ struct ProductDetailView: View {
     @State var size = "Маленькая"
     @State var count = 1
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         
         VStack {
@@ -52,9 +54,7 @@ struct ProductDetailView: View {
                 .padding()
             }
             
-            Button {
-                print("Add to cart tapped")
-            } label: {
+            Button(action: addToCartButtonTapped) {
                 Text("Добавить в корзину")
             }
             .padding()
@@ -68,6 +68,22 @@ struct ProductDetailView: View {
 
             Spacer()
         }
+    }
+    
+    private func addToCartButtonTapped() {
+        
+        let product = Product(id: viewModel.product.id,
+                              title: "\(viewModel.product.title) \(size.lowercased())",
+                              imageUrl: viewModel.product.imageUrl,
+                              price: viewModel.getPrice(size: size),
+                              description: viewModel.product.description)
+        
+        let position = Position(id: UUID().uuidString,
+                                product: product,
+                                count: self.count)
+        
+        CartViewModel.shared.addPosition(position)
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
