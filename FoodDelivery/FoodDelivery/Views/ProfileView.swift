@@ -37,6 +37,8 @@ struct ProfileView: View {
                 .padding()
             
         }
+        .padding(.top, 16)
+        .navigationTitle("Профиль")
         .confirmationDialog(Text("Выбор фото"),
                             isPresented: $showAvatarSelectionDialog,
                             titleVisibility: .visible) {

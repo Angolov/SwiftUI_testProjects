@@ -45,7 +45,6 @@ struct ProductDetailView: View {
                 .padding(.horizontal)
                 
                 Picker("Размер пиццы", selection: $size) {
-                    
                     ForEach(viewModel.sizes, id: \.self) { item in
                         Text(item)
                     }
@@ -54,20 +53,20 @@ struct ProductDetailView: View {
                 .padding()
             }
             
-            Button(action: addToCartButtonTapped) {
-                Text("Добавить в корзину")
-            }
-            .padding()
-            .padding(.horizontal, 30)
-            .foregroundColor(Color("DarkBrown"))
-            .font(.title3.bold())
-            .background(LinearGradient(colors: [Color("Yellow"), Color("Orange")],
-                                       startPoint: .leading,
-                                       endPoint: .trailing))
-            .cornerRadius(15)
-
+            Button("Добавить в корзину", action: addToCartButtonTapped)
+                .padding()
+                .padding(.horizontal, 30)
+                .foregroundColor(Color("DarkBrown"))
+                .font(.title3.bold())
+                .background(LinearGradient(colors: [Color("Yellow"), Color("Orange")],
+                                           startPoint: .leading,
+                                           endPoint: .trailing))
+                .cornerRadius(15)
+            
             Spacer()
         }
+        .navigationTitle("Информация о продукте")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func addToCartButtonTapped() {

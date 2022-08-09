@@ -21,7 +21,9 @@ struct MainTabBar: View {
                 }
             }
             
-            CartView(viewModel: CartViewModel.shared)
+            NavigationView{
+                CartView(viewModel: CartViewModel.shared)
+            }
                 .tabItem {
                     VStack {
                         Image(systemName: "cart")
@@ -29,7 +31,9 @@ struct MainTabBar: View {
                     }
                 }
             
-            ProfileView()
+            NavigationView {
+                ProfileView()
+            }
                 .tabItem {
                     VStack {
                         Image(systemName: "person.circle")
