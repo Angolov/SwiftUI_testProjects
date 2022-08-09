@@ -18,15 +18,7 @@ struct CatalogueView: View {
             Section("Популярное") {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: layout, spacing: 16) {
-                        ForEach(CatalogueViewModel.shared.products, id: \.id) { item in
-                            NavigationLink {
-                                let viewModel = ProductDetailViewModel(product: item)
-                                ProductDetailView(viewModel: viewModel)
-                            } label: {
-                                ProductCell(product: item)
-                                    .foregroundColor(.black)
-                            }
-                        }
+                        productCells
                     }
                     .padding(8)
                     .padding(.vertical, 8)
@@ -36,15 +28,7 @@ struct CatalogueView: View {
             Section("Пицца") {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: layout) {
-                        ForEach(CatalogueViewModel.shared.products, id: \.id) { item in
-                            NavigationLink {
-                                let viewModel = ProductDetailViewModel(product: item)
-                                ProductDetailView(viewModel: viewModel)
-                            } label: {
-                                ProductCell(product: item)
-                                    .foregroundColor(.black)
-                            }
-                        }
+                        productCells
                     }
                     .padding(8)
                     .padding(.vertical, 8)
@@ -54,6 +38,18 @@ struct CatalogueView: View {
             
         }
         .navigationTitle("Каталог")
+    }
+    
+    private var productCells: some View {
+        ForEach(CatalogueViewModel.shared.products, id: \.id) { item in
+            NavigationLink {
+                let viewModel = ProductDetailViewModel(product: item)
+                ProductDetailView(viewModel: viewModel)
+            } label: {
+                ProductCell(product: item)
+                    .foregroundColor(.black)
+            }
+        }
     }
 }
 
