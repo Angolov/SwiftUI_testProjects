@@ -11,6 +11,7 @@
 		5B63571528A2D817006085E3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5B63571428A2D817006085E3 /* FirebaseAuth */; };
 		5B63571728A2D817006085E3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5B63571628A2D817006085E3 /* FirebaseFirestore */; };
 		5B63571928A2D817006085E3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5B63571828A2D817006085E3 /* FirebaseStorage */; };
+		5B63571B28A2DB55006085E3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B63571A28A2DB55006085E3 /* AuthService.swift */; };
 		5B8FDDA328A0310500FB72DC /* FoodDeliveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */; };
 		5B8FDDA528A0310500FB72DC /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA428A0310500FB72DC /* AuthView.swift */; };
 		5B8FDDA728A0310700FB72DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA628A0310700FB72DC /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		5B63571128A2D55B006085E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5B63571A28A2DB55006085E3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5B8FDD9F28A0310500FB72DC /* FoodDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDeliveryApp.swift; sourceTree = "<group>"; };
 		5B8FDDA428A0310500FB72DC /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B63571C28A2DB58006085E3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5B63571A28A2DB55006085E3 /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		5B8FDD9628A0310500FB72DC = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */,
+				5B63571C28A2DB58006085E3 /* Services */,
 				5BEAD01C28A143BB004FDF4D /* Model */,
 				5BB1EEBE28A1260D00578C60 /* Views */,
 				5BEAD01F28A143E0004FDF4D /* ViewModel */,
@@ -243,6 +254,7 @@
 				5BE1CD6F28A17DA200657CA7 /* ProductDetailViewModel.swift in Sources */,
 				5BEAD01128A13908004FDF4D /* MainTabBar.swift in Sources */,
 				5BEAD01B28A13D46004FDF4D /* ProductCell.swift in Sources */,
+				5B63571B28A2DB55006085E3 /* AuthService.swift in Sources */,
 				5B8FDDA328A0310500FB72DC /* FoodDeliveryApp.swift in Sources */,
 				5BEAD01328A13B1F004FDF4D /* CatalogueView.swift in Sources */,
 			);

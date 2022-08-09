@@ -18,6 +18,9 @@ struct AuthView: View {
     @State private var confirmPassword = ""
     @State private var showRegistrationForm = false
     @State private var showTabView = false
+    @State private var showAuthAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
     
     // MARK: - Body
     
@@ -60,6 +63,11 @@ struct AuthView: View {
         .animation(Animation.easeInOut(duration: 0.3), value: showRegistrationForm)
         .fullScreenCover(isPresented: $showTabView) {
             MainTabBar()
+        }
+        .alert(alertTitle, isPresented: $showAuthAlert) {
+            Button("ОК", action: {})
+        } message: {
+            Text(alertMessage)
         }
     }
 }
@@ -139,10 +147,31 @@ extension AuthView {
 extension AuthView {
     
     private func registerUser() {
-        // Some process for user registration
+        guard userPassword == confirmPassword else {
+            alertTitle = "Ошибка"
+            alertMessage = "Пароль не совпадает"
+            showAuthAlert = true
+            return
+        }
         
-        cleanTextFields()
-        showRegistrationForm = false
+        AuthService.shared.signUp(email: self.userLogin,
+                                  password: self.userPassword) { result in
+            
+            switch result {
+                
+            case .success(let user):
+                alertTitle = "Поздравляем!"
+                alertMessage = "Вы успешно зарегистрированы. Ваш логин - \(user.email ?? "")"
+                showAuthAlert = true
+                cleanTextFields()
+                showRegistrationForm = false
+                
+            case .failure(let error):
+                alertTitle = "Ошибка регистрации"
+                alertMessage = error.localizedDescription
+                showAuthAlert = true
+            }
+        }
     }
     
     private func cleanTextFields() {
@@ -152,9 +181,20 @@ extension AuthView {
     }
     
     private func loginWithUser() {
-        // Some process for user login
-        
-        showTabView = true
+        AuthService.shared.signIn(email: self.userLogin,
+                                  password: self.userPassword) { result in
+            switch result {
+                
+            case .success(_):
+                cleanTextFields()
+                showTabView = true
+                
+            case .failure(let error):
+                alertTitle = "Ошибка регистрации"
+                alertMessage = error.localizedDescription
+                showAuthAlert = true
+            }
+        }
     }
 }
 
