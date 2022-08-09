@@ -13,6 +13,9 @@
 		5B8FDDAA28A0310700FB72DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA928A0310700FB72DC /* Preview Assets.xcassets */; };
 		5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC028A1262800578C60 /* EmailField.swift */; };
 		5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC228A1265300578C60 /* PasswordField.swift */; };
+		5BE1CD6F28A17DA200657CA7 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */; };
+		5BE1CD7128A23C9900657CA7 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1CD7028A23C9900657CA7 /* CartViewModel.swift */; };
+		5BE1CD7328A23CB100657CA7 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1CD7228A23CB100657CA7 /* Position.swift */; };
 		5BEAD01128A13908004FDF4D /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01028A13908004FDF4D /* MainTabBar.swift */; };
 		5BEAD01328A13B1F004FDF4D /* CatalogueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01228A13B1F004FDF4D /* CatalogueView.swift */; };
 		5BEAD01528A13B71004FDF4D /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEAD01428A13B71004FDF4D /* CartView.swift */; };
@@ -31,6 +34,9 @@
 		5B8FDDA928A0310700FB72DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5BB1EEC028A1262800578C60 /* EmailField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailField.swift; sourceTree = "<group>"; };
 		5BB1EEC228A1265300578C60 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
+		5BE1CD7028A23C9900657CA7 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		5BE1CD7228A23CB100657CA7 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		5BEAD01028A13908004FDF4D /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		5BEAD01228A13B1F004FDF4D /* CatalogueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueView.swift; sourceTree = "<group>"; };
 		5BEAD01428A13B71004FDF4D /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				5BEAD01828A13C8C004FDF4D /* Product.swift */,
+				5BE1CD7228A23CB100657CA7 /* Position.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				5BEAD01D28A143D8004FDF4D /* CatalogueViewModel.swift */,
+				5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */,
+				5BE1CD7028A23C9900657CA7 /* CartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -201,12 +210,15 @@
 			files = (
 				5BEAD01E28A143D8004FDF4D /* CatalogueViewModel.swift in Sources */,
 				5BEAD01728A13B8A004FDF4D /* ProfileView.swift in Sources */,
+				5BE1CD7128A23C9900657CA7 /* CartViewModel.swift in Sources */,
 				5B8FDDA528A0310500FB72DC /* AuthView.swift in Sources */,
 				5BEAD01928A13C8C004FDF4D /* Product.swift in Sources */,
 				5BEAD01528A13B71004FDF4D /* CartView.swift in Sources */,
 				5BEAD02128A146C5004FDF4D /* ProductDetailView.swift in Sources */,
 				5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */,
+				5BE1CD7328A23CB100657CA7 /* Position.swift in Sources */,
 				5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */,
+				5BE1CD6F28A17DA200657CA7 /* ProductDetailViewModel.swift in Sources */,
 				5BEAD01128A13908004FDF4D /* MainTabBar.swift in Sources */,
 				5BEAD01B28A13D46004FDF4D /* ProductCell.swift in Sources */,
 				5B8FDDA328A0310500FB72DC /* FoodDeliveryApp.swift in Sources */,
