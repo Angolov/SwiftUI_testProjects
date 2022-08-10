@@ -13,6 +13,8 @@ struct EmailField: View {
     
     var body: some View {
         TextField("Введите email", text: $text)
+            .keyboardType(.emailAddress)
+            .textInputAutocapitalization(.never)
             .padding()
             .background(Color("WhiteAlpha"))
             .cornerRadius(12)
