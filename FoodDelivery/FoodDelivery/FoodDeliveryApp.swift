@@ -24,7 +24,8 @@ struct FoodDeliveryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthView()
+            let viewModel = AuthViewModel()
+            AuthView(viewModel: viewModel)
         }
     }
 }

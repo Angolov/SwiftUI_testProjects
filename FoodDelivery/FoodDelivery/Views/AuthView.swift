@@ -22,6 +22,8 @@ struct AuthView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
+    @StateObject var viewModel: AuthViewModel
+    
     // MARK: - Body
     
     var body: some View {
@@ -88,13 +90,13 @@ extension AuthView {
     private var proceedButton: some View {
         Button(action: proceedButtonTapped) {
             Text(showRegistrationForm ? "Создать аккаунт" : "Войти")
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(buttonColorGradient)
-                .cornerRadius(12)
-                .font(.title3.bold())
-                .foregroundColor(Color("DarkBrown"))
         }
+        .font(.title3.bold())
+        .foregroundColor(Color("DarkBrown"))
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(buttonColorGradient)
+        .cornerRadius(12)
     }
     
     private var buttonColorGradient: some View {
@@ -106,12 +108,12 @@ extension AuthView {
     private var formSwitchButton: some View {
         Button(action: formSwitchButtonTapped) {
             Text(showRegistrationForm ? "Уже есть аккаунт" : "Еще не с нами?")
-                .padding(.horizontal)
-                .frame(maxWidth: .infinity)
-                .cornerRadius(12)
-                .font(.title3.bold())
-                .foregroundColor(Color("DarkBrown"))
         }
+        .font(.title3.bold())
+        .foregroundColor(Color("DarkBrown"))
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity)
+        .cornerRadius(12)
     }
     
     private var backgroundImage: some View {
@@ -129,11 +131,9 @@ extension AuthView {
     
     private func proceedButtonTapped() {
         if showRegistrationForm {
-            print("Register is tapped")
-            registerUser()
+            signUp()
         } else {
-            print("Login is tapped")
-            loginWithUser()
+            signIn()
         }
     }
     
@@ -146,30 +146,38 @@ extension AuthView {
 
 extension AuthView {
     
-    private func registerUser() {
-        guard userPassword == confirmPassword else {
-            alertTitle = "Ошибка"
-            alertMessage = "Пароль не совпадает"
-            showAuthAlert = true
-            return
-        }
-        
-        AuthService.shared.signUp(email: self.userLogin,
-                                  password: self.userPassword) { result in
-            
+    private func signIn() {
+        viewModel.signIn(email: userLogin, password: userPassword) { result in
             switch result {
                 
-            case .success(let user):
-                alertTitle = "Поздравляем!"
-                alertMessage = "Вы успешно зарегистрированы. Ваш логин - \(user.email ?? "")"
+            case .success(_):
+                cleanTextFields()
+                showTabView = true
+                
+            case .failure(_):
+                alertTitle = viewModel.messageTitle
+                alertMessage = viewModel.messageText
                 showAuthAlert = true
+            }
+        }
+    }
+
+    private func signUp() {
+        viewModel.signUp(email: userLogin,
+                         password: userPassword,
+                         confirmPassword: confirmPassword) { result in
+            
+            alertTitle = viewModel.messageTitle
+            alertMessage = viewModel.messageText
+            showAuthAlert = true
+            
+            switch result {
+            case .success(_):
                 cleanTextFields()
                 showRegistrationForm = false
                 
-            case .failure(let error):
-                alertTitle = "Ошибка регистрации"
-                alertMessage = error.localizedDescription
-                showAuthAlert = true
+            case .failure(_):
+                return
             }
         }
     }
@@ -179,27 +187,10 @@ extension AuthView {
         userPassword = ""
         confirmPassword = ""
     }
-    
-    private func loginWithUser() {
-        AuthService.shared.signIn(email: self.userLogin,
-                                  password: self.userPassword) { result in
-            switch result {
-                
-            case .success(_):
-                cleanTextFields()
-                showTabView = true
-                
-            case .failure(let error):
-                alertTitle = "Ошибка регистрации"
-                alertMessage = error.localizedDescription
-                showAuthAlert = true
-            }
-        }
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthView()
+        AuthView(viewModel: AuthViewModel())
     }
 }
