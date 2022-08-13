@@ -65,8 +65,10 @@ struct AuthView: View {
         .background(backgroundImage)
         .animation(Animation.easeInOut(duration: 0.3), value: showRegistrationForm)
         .onAppear {
-            if AuthService.shared.currentUser != nil {
-                showTabView = true
+            viewModel.checkSavedAuthData { isAuthorized in
+                if isAuthorized {
+                    showTabView = true
+                }
             }
         }
         .alert(alertTitle, isPresented: $showAuthAlert) {

@@ -34,6 +34,7 @@ class AuthViewModel: ObservableObject {
             switch result {
                 
             case .success(let user):
+                SessionManager.shared.userID = user.uid
                 completion(.success(user))
                 
             case .failure(let error):
@@ -73,6 +74,20 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func checkSavedAuthData(completion: @escaping (Bool) -> Void) {
+        AuthService.shared.getCurrentUserID { result in
+            switch result {
+                
+            case .success(let userID):
+                SessionManager.shared.userID = userID
+                completion(true)
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(false)
+            }
+        }
+    }
+    
     // MARK: - Private methods
     
     private func addUserToDatabase(user: User, completion: @escaping (Result<User, Error>) -> Void) {
@@ -85,6 +100,7 @@ class AuthViewModel: ObservableObject {
             switch result {
                 
             case .success(_):
+                SessionManager.shared.userID = user.uid
                 completion(.success(user))
             case .failure(let error):
                 completion(.failure(error))
