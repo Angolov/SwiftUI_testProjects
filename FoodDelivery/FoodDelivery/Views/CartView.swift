@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CartView: View {
     
+    @State private var showOrderMessage = false
     @StateObject var viewModel: CartViewModel
     
     var body: some View {
@@ -35,6 +36,12 @@ struct CartView: View {
             .padding()
         }
         .navigationTitle("Корзина")
+        .alert(viewModel.messageTitle, isPresented: $showOrderMessage) {
+            Button("OK", action: {})
+        } message: {
+            Text(viewModel.messageText)
+        }
+
     }
 }
 
@@ -87,7 +94,9 @@ extension CartView {
     }
     
     private func confirmOrderTapped() {
-        print("Place order tapped")
+        viewModel.placeOrder {
+            showOrderMessage = true
+        }
     }
 }
 

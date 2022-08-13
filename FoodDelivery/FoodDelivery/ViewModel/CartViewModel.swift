@@ -13,6 +13,8 @@ class CartViewModel: ObservableObject {
     
     private init() {}
     
+    var messageTitle = ""
+    var messageText = ""
     @Published var positions = [Position]()
     
     var totalCost: Int {
@@ -26,7 +28,26 @@ class CartViewModel: ObservableObject {
     }
     
     func addPosition(_ position: Position) {
-        
         self.positions.append(position)
+    }
+    
+    func placeOrder(completion: @escaping () -> Void) {
+        let order = Order(userID: SessionManager.shared.userID,
+                          positions: positions,
+                          status: .new)
+        
+        DatabaseService.shared.setOrder(order: order) { [weak self] result in
+            switch result {
+            case .success(let order):
+                self?.messageTitle = "Спасибо"
+                self?.messageText = "Ваш заказ на сумму \(order.cost) ₽ создан!"
+                self?.positions = [Position]()
+                
+            case .failure(let error):
+                self?.messageTitle = "Ошибка!"
+                self?.messageText = "\(error.localizedDescription)"
+            }
+            completion()
+        }
     }
 }

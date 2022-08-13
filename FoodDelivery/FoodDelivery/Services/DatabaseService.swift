@@ -23,6 +23,10 @@ class DatabaseService {
         return database.collection("users")
     }
     
+    private var ordersRef: CollectionReference {
+        return database.collection("orders")
+    }
+    
     func setProfile(user: AppUser, completion: @escaping (Result<AppUser, Error>) -> Void) {
         usersRef.document(user.id).setData(user.representation) { error in
             if let error = error {
@@ -34,21 +38,7 @@ class DatabaseService {
     }
     
     func getProfile(completion: @escaping (Result<AppUser, Error>) -> Void) {
-        AuthService.shared.getCurrentUserID { [weak self] result in
-            switch result {
-            case .success(let userID):
-                self?.fetchProfileFor(userID: userID, completion: completion)
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    // MARK: - Private methods
-    
-    private func fetchProfileFor(userID: String, completion: @escaping (Result<AppUser, Error>) -> Void) {
-        usersRef.document(userID).getDocument { [weak self] snapshot, error in
+        usersRef.document(SessionManager.shared.userID).getDocument { [weak self] snapshot, error in
             guard let self = self else { return }
             do {
                 let data = try self.getDataFrom(snapshot: snapshot)
@@ -60,6 +50,26 @@ class DatabaseService {
             }
         }
     }
+    
+    func setOrder(order: Order, completion: @escaping (Result<Order, Error>) -> Void) {
+        ordersRef.document(order.id).setData(order.representation) { error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            self.setPositions(to: order.id, positions: order.positions) { result in
+                switch result {
+                case .success(_):
+                    completion(.success(order))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Private methods
     
     private func getDataFrom(snapshot: DocumentSnapshot?) throws -> [String : Any] {
         guard let data = snapshot?.data()
@@ -80,5 +90,16 @@ class DatabaseService {
         }
         
         return AppUser(id: id, name: name, phone: phone, address: address)
+    }
+    
+    private func setPositions(to orderID: String,
+                      positions: [Position],
+                      completion: @escaping (Result<[Position], Error>) -> Void) {
+        
+        let positionsRef = ordersRef.document(orderID).collection("positions")
+        for position in positions {
+            positionsRef.document(position.id).setData(position.representation)
+        }
+        completion(.success(positions))
     }
 }
