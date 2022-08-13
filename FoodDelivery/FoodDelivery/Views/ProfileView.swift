@@ -13,19 +13,22 @@ struct ProfileView: View {
     @State var showQuitDialog = false
     @Environment(\.presentationMode) var presentationMode
     
+    @StateObject var viewModel: ProfileViewModel
+    
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             HStack(spacing: 16) {
-                avatar
+                avatarImage
                     .onTapGesture(perform: avatarTapped)
                     
-                contacts
+                contactsText
                 
                 Spacer()
             }
             .padding(.horizontal)
             
-            address
+            addressText
+                .padding(.horizontal)
             
             // Таблица с заказами
             List {
@@ -36,6 +39,12 @@ struct ProfileView: View {
             quitButton
                 .padding()
             
+        }
+        .onAppear {
+            viewModel.getProfile()
+        }
+        .onSubmit {
+            viewModel.setProfile()
         }
         .padding(.top, 16)
         .navigationTitle("Профиль")
@@ -52,7 +61,6 @@ struct ProfileView: View {
             Button("Да", role: .destructive, action: quitConfirmTapped)
             Button("Нет", role: .cancel, action: {})
         }
-        
     }
 }
 
@@ -60,7 +68,7 @@ struct ProfileView: View {
 
 extension ProfileView {
     
-    private var avatar: some View {
+    private var avatarImage: some View {
         Image("UserImage")
             .resizable()
             .frame(width: 80, height: 80)
@@ -69,21 +77,24 @@ extension ProfileView {
             .clipShape(Circle())
     }
     
-    private var contacts: some View {
+    private var contactsText: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Имя пользователя")
-                .bold()
+            TextField("Имя", text: $viewModel.profile.name)
+                .font(.body.bold())
             
-            Text("+7 9991234567")
+            HStack {
+                Text("+7")
+                TextField("Телефон", value: $viewModel.profile.phone, format: .number)
+            }
         }
     }
     
-    private var address: some View {
+    private var addressText: some View {
         VStack(alignment: .leading) {
             Text("Адрес доставки:")
-                .bold()
+                .font(.body.bold())
             
-            Text("Россия, Московская область, г. Владимир, ул. Ленина д.2, кв. 10")
+            TextField("Адрес", text: $viewModel.profile.address)
         }
     }
     
@@ -128,6 +139,12 @@ extension ProfileView {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        
+        let name = "Имя Фамилия"
+        let phone = 9195191919
+        let address = "Россия, Московская область, г. Владимир, ул. Ленина д.2, кв.10"
+        let viewModel = ProfileViewModel(profile: AppUser(id: "", name: name, phone: phone, address: address))
+        
+        ProfileView(viewModel: viewModel)
     }
 }

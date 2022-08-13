@@ -32,7 +32,11 @@ struct MainTabBar: View {
                 }
             
             NavigationView {
-                ProfileView()
+                let viewModel = ProfileViewModel(profile: AppUser(id: "",
+                                                                  name: "",
+                                                                  phone: 0000000000,
+                                                                  address: ""))
+                ProfileView(viewModel: viewModel)
             }
                 .tabItem {
                     VStack {
