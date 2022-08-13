@@ -13,8 +13,8 @@ struct Order {
     var id = UUID().uuidString
     var userID: String
     var positions = [Position]()
-    var date: Date
-    var status: String
+    var date = Date()
+    var status: OrderStatus
     
     var cost: Int {
         var sum = 0
@@ -31,7 +31,7 @@ struct Order {
         repres["id"] = id
         repres["userID"] = userID
         repres["date"] = Timestamp(date: date)
-        repres["status"] = status
+        repres["status"] = status.rawValue
         return repres
     }
 }
