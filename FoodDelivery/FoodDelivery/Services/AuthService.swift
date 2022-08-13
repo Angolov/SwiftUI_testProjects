@@ -8,12 +8,17 @@
 import Foundation
 import FirebaseAuth
 
+enum AuthServiceError: Error {
+    case userNotFound
+}
+
 class AuthService {
     
     static let shared = AuthService()
     private init() {}
     
     private let auth = Auth.auth()
+    
     var currentUser: User? {
         return auth.currentUser
     }
@@ -43,5 +48,13 @@ class AuthService {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func getCurrentUserID(completion: @escaping (Result<String, Error>) -> Void) {
+        guard let userID = auth.currentUser?.uid else {
+            completion(.failure(AuthServiceError.userNotFound))
+            return
+        }
+        completion(.success(userID))
     }
 }

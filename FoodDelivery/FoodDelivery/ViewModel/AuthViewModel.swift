@@ -81,7 +81,7 @@ class AuthViewModel: ObservableObject {
                               phone: 0,
                               address: "")
         
-        DatabaseService.shared.createUser(user: appUser) { result in
+        DatabaseService.shared.setProfile(user: appUser) { result in
             switch result {
                 
             case .success(_):

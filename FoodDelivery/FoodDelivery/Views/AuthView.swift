@@ -19,6 +19,7 @@ struct AuthView: View {
     @State private var showRegistrationForm = false
     @State private var showTabView = false
     @State private var showAuthAlert = false
+    @State private var showRegSuccessMessage = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
@@ -63,13 +64,25 @@ struct AuthView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(backgroundImage)
         .animation(Animation.easeInOut(duration: 0.3), value: showRegistrationForm)
-        .fullScreenCover(isPresented: $showTabView) {
-            MainTabBar()
+        .onAppear {
+            if AuthService.shared.currentUser != nil {
+                showTabView = true
+            }
         }
         .alert(alertTitle, isPresented: $showAuthAlert) {
             Button("ОК", action: {})
         } message: {
             Text(alertMessage)
+        }
+        .alert(alertTitle, isPresented: $showRegSuccessMessage) {
+            Button("ОК") {
+                showTabView = true
+            }
+        } message: {
+            Text(alertMessage)
+        }
+        .fullScreenCover(isPresented: $showTabView) {
+            MainTabBar()
         }
     }
 }
@@ -169,15 +182,14 @@ extension AuthView {
             
             alertTitle = viewModel.messageTitle
             alertMessage = viewModel.messageText
-            showAuthAlert = true
             
             switch result {
             case .success(_):
                 cleanTextFields()
-                showRegistrationForm = false
+                showRegSuccessMessage = true
                 
             case .failure(_):
-                return
+                showAuthAlert = true
             }
         }
     }
