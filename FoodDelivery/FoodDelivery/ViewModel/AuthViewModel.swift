@@ -88,6 +88,10 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func isAdmin() -> Bool {
+        return AuthService.shared.currentUser?.uid == "qCSmEYEtabXrOX7baTEautegkS12"
+    }
+    
     // MARK: - Private methods
     
     private func addUserToDatabase(user: User, completion: @escaping (Result<User, Error>) -> Void) {

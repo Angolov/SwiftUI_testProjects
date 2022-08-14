@@ -61,6 +61,20 @@ class DatabaseService {
         }
     }
     
+    func getProfile(by userID: String, completion: @escaping (Result<AppUser, Error>) -> Void) {
+        usersRef.document(userID).getDocument { [weak self] snapshot, error in
+            guard let self = self else { return }
+            do {
+                let data = try self.getDataFrom(snapshot: snapshot)
+                let user = try self.parseUserFrom(data: data)
+                completion(.success(user))
+            }
+            catch (let error) {
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func setOrder(order: Order, completion: @escaping (Result<Order, Error>) -> Void) {
         ordersRef.document(order.id).setData(order.representation) { error in
             if let error = error {

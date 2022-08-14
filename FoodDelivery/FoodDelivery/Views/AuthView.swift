@@ -18,6 +18,7 @@ struct AuthView: View {
     @State private var confirmPassword = ""
     @State private var showRegistrationForm = false
     @State private var showTabView = false
+    @State private var showAdminPanel = false
     @State private var showAuthAlert = false
     @State private var showRegSuccessMessage = false
     @State private var alertTitle = ""
@@ -67,7 +68,11 @@ struct AuthView: View {
         .onAppear {
             viewModel.checkSavedAuthData { isAuthorized in
                 if isAuthorized {
-                    showTabView = true
+                    if viewModel.isAdmin() {
+                        showAdminPanel = true
+                    } else {
+                        showTabView = true
+                    }
                 }
             }
         }
@@ -85,6 +90,11 @@ struct AuthView: View {
         }
         .fullScreenCover(isPresented: $showTabView) {
             MainTabBar()
+        }
+        .fullScreenCover(isPresented: $showAdminPanel) {
+            NavigationView {
+                AdminOrdersView()
+            }
         }
     }
 }
@@ -167,7 +177,11 @@ extension AuthView {
                 
             case .success(_):
                 cleanTextFields()
-                showTabView = true
+                if viewModel.isAdmin() {
+                    showAdminPanel = true
+                } else {
+                    showTabView = true
+                }
                 
             case .failure(_):
                 alertTitle = viewModel.messageTitle
