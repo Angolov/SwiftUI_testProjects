@@ -149,6 +149,7 @@ extension ProfileView {
     }
     
     private func quitConfirmTapped() {
+        viewModel.signOut()
         presentationMode.wrappedValue.dismiss()
     }
 }

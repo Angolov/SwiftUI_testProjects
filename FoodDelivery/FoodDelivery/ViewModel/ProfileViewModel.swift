@@ -60,6 +60,10 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
+    func signOut() {
+        AuthService.shared.signOut()
+    }
+    
     // MARK: - Private methods
     
     private func getPositions() {

@@ -60,6 +60,10 @@ class AuthService {
         }
     }
     
+    func signOut() {
+        try? auth.signOut()
+    }
+    
     func getCurrentUserID(completion: @escaping (Result<String, Error>) -> Void) {
         guard let userID = auth.currentUser?.uid else {
             completion(.failure(AuthServiceError.userNotFound))
