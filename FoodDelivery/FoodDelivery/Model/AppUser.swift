@@ -7,7 +7,11 @@
 
 import Foundation
 
+// MARK: - AppUser struct
+
 struct AppUser: Identifiable {
+    
+    // MARK: - Properties
     
     var id: String
     var name: String

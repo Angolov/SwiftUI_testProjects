@@ -7,7 +7,11 @@
 
 import SwiftUI
 
+// MARK: - MainTabBar struct
+
 struct MainTabBar: View {
+    
+    // MARK: - Body
     
     var body: some View {
         TabView {

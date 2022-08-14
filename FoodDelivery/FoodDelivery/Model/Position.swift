@@ -8,10 +8,17 @@
 import Foundation
 import FirebaseFirestore
 
+// MARK: - Position struct
+
 struct Position: Identifiable {
+    
+    // MARK: - Properties
+    
     var id: String
     var product: Product
     var count: Int
+    
+    // MARK: - Computed properties
     
     var cost: Int {
         return product.price * self.count
@@ -26,6 +33,8 @@ struct Position: Identifiable {
         repres["cost"] = self.cost        
         return repres
     }
+    
+    // MARK: - Init
     
     init(id: String, product: Product, count: Int) {
         self.id = id

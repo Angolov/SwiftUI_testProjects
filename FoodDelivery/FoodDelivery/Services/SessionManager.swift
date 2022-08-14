@@ -7,10 +7,16 @@
 
 import Foundation
 
+// MARK: - SessionManager class
+
 class SessionManager {
+    
+    // MARK: - Singleton
     
     static let shared = SessionManager()
     private init() {}
+    
+    // MARK: - Properties
     
     var userID = "" {
         didSet {
@@ -19,10 +25,11 @@ class SessionManager {
     }
     var userProfile: AppUser = AppUser(id: "", name: "", phone: 0, address: "")
     
+    // MARK: - Private methods
+    
     private func getUserProfile() {
         DatabaseService.shared.getProfile { [weak self] result in
             switch result {
-                
             case .success(let profile):
                 self?.userProfile = profile
             case .failure(let error):

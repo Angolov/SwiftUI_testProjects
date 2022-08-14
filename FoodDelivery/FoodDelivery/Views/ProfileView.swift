@@ -7,13 +7,19 @@
 
 import SwiftUI
 
+// MARK: - ProfileView struct
+
 struct ProfileView: View {
+    
+    // MARK: - Properties
     
     @State var showAvatarSelectionDialog = false
     @State var showQuitDialog = false
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var viewModel: ProfileViewModel
+    
+    // MARK: - Body
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {

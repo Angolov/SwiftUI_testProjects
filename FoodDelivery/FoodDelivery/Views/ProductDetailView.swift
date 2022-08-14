@@ -7,13 +7,19 @@
 
 import SwiftUI
 
+// MARK: - ProductDetailView struct
+
 struct ProductDetailView: View {
+    
+    // MARK: - Properties
     
     var viewModel: ProductDetailViewModel
     @State var size = "Маленькая"
     @State var count = 1
     
     @Environment(\.presentationMode) var presentationMode
+    
+    // MARK: - Body
     
     var body: some View {
         
@@ -68,6 +74,8 @@ struct ProductDetailView: View {
         .navigationTitle("Информация о продукте")
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    // MARK: - Private methods
     
     private func addToCartButtonTapped() {
         

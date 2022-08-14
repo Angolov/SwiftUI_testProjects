@@ -8,13 +8,19 @@
 import Foundation
 import FirebaseFirestore
 
+// MARK: - Order struct
+
 struct Order {
+    
+    // MARK: - Properties
     
     var id = UUID().uuidString
     var userID: String
     var positions = [Position]()
     var date = Date()
     var status: OrderStatus
+    
+    // MARK: - Computed properties
     
     var cost: Int {
         var sum = 0
@@ -34,6 +40,8 @@ struct Order {
         repres["status"] = status.rawValue
         return repres
     }
+    
+    // MARK: - Init
     
     init(id: String = UUID().uuidString,
          userID: String,

@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+// MARK: - PositionCell struct
+
 struct PositionCell: View {
     
+    // MARK: - Properties
+    
     let position: Position
+    
+    // MARK: - Body
     
     var body: some View {
         HStack {

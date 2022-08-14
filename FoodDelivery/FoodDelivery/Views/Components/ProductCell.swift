@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+// MARK: - ProductCell struct
+
 struct ProductCell: View {
     
+    // MARK: - Properties
+    
     var product: Product
+    
+    // MARK: - Body
     
     var body: some View {
         

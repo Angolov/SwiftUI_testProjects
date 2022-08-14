@@ -7,10 +7,16 @@
 
 import SwiftUI
 
+// MARK: - PasswordField struct
+
 struct PasswordField: View {
+    
+    // MARK: - Properties
     
     var placeholder: String
     @Binding var text: String
+    
+    // MARK: - Body
     
     var body: some View {
         SecureField("Введите пароль", text: $text)

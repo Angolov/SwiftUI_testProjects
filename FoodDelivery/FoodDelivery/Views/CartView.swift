@@ -7,10 +7,16 @@
 
 import SwiftUI
 
+// MARK: - CartView struct
+
 struct CartView: View {
+    
+    // MARK: - Properties
     
     @State private var showOrderMessage = false
     @StateObject var viewModel: CartViewModel
+    
+    // MARK: - Body
     
     var body: some View {
         

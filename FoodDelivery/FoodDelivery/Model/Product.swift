@@ -7,7 +7,12 @@
 
 import Foundation
 
+// MARK: - Product struct
+
 struct Product {
+    
+    // MARK: - Properties
+    
     var id: String
     var title: String
     var imageUrl: String

@@ -7,7 +7,11 @@
 
 import Foundation
 
+// MARK: - CatalogueViewModel class
+
 class CatalogueViewModel: ObservableObject {
+    
+    // MARK: - Properties
     
     static let shared = CatalogueViewModel()
     

@@ -7,14 +7,22 @@
 
 import Foundation
 
+// MARK: - ProductDetailViewModel class
+
 class ProductDetailViewModel: ObservableObject {
+    
+    // MARK: - Properties
     
     @Published var product: Product
     @Published var sizes = ["Маленькая", "Средняя", "Большая"]
     
+    // MARK: - Init
+    
     init(product: Product) {
         self.product = product
     }
+    
+    // MARK: - Public methods
     
     func getPrice(size: String) -> Int {
         

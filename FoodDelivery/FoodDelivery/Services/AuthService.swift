@@ -8,20 +8,30 @@
 import Foundation
 import FirebaseAuth
 
+// MARK: - AuthServiceError enum
+
 enum AuthServiceError: Error {
     case userNotFound
 }
 
+// MARK: - AuthService class
+
 class AuthService {
+    
+    // MARK: - Singleton
     
     static let shared = AuthService()
     private init() {}
+    
+    // MARK: - Properties
     
     private let auth = Auth.auth()
     
     var currentUser: User? {
         return auth.currentUser
     }
+    
+    // MARK: - Public methods
     
     func signUp(email: String,
                 password: String,

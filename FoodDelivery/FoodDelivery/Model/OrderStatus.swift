@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - OrderStatus enum
+
 enum OrderStatus: String {
     
     case new = "Новый"

@@ -7,14 +7,22 @@
 
 import Foundation
 
+// MARK: - ProfileViewModel class
+
 class ProfileViewModel: ObservableObject {
+    
+    // MARK: - Properties
     
     @Published var profile: AppUser
     @Published var orders: [Order] = [Order]()
     
+    // MARK: - Init
+    
     init(profile: AppUser) {
         self.profile = profile
     }
+    
+    // MARK: - Public methods
     
     func setProfile() {
         DatabaseService.shared.setProfile(user: profile) { result in
@@ -51,6 +59,8 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    // MARK: - Private methods
     
     private func getPositions() {
         for (index, order) in orders.enumerated() {

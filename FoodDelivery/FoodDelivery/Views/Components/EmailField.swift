@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+// MARK: - EmailField struct
+
 struct EmailField: View {
     
+    // MARK: - Properties
+    
     @Binding var text: String
+    
+    // MARK: - Body
     
     var body: some View {
         TextField("Введите email", text: $text)

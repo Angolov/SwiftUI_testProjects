@@ -7,9 +7,14 @@
 
 import SwiftUI
 
+// MARK: - CatalogueView struct
 struct CatalogueView: View {
     
+    // MARK: - Properties
+    
     let layout = [GridItem(.adaptive(minimum: screen.width / 2.2))]
+    
+    // MARK: - Body
     
     var body: some View {
         
@@ -39,6 +44,8 @@ struct CatalogueView: View {
         }
         .navigationTitle("Каталог")
     }
+    
+    // MARK: - Private methods
     
     private var productCells: some View {
         ForEach(CatalogueViewModel.shared.products, id: \.id) { item in

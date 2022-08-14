@@ -7,9 +7,15 @@
 
 import SwiftUI
 
+// MARK: - OrderCell struct
+
 struct OrderCell: View {
     
+    // MARK: - Properties
+    
     var order: Order
+    
+    // MARK: - Body
     
     var body: some View {
         HStack {
