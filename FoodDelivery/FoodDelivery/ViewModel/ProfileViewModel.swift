@@ -41,13 +41,26 @@ class ProfileViewModel: ObservableObject {
     }
     
     func getOrders() {
-        DatabaseService.shared.getOrders(by: SessionManager.shared.userID) { result in
+        DatabaseService.shared.getOrders(by: SessionManager.shared.userID) { [weak self] result in
             switch result {
-                
             case .success(let orders):
-                self.orders = orders
+                self?.orders = orders
+                self?.getPositions()
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func getPositions() {
+        for (index, order) in orders.enumerated() {
+            DatabaseService.shared.getPositions(by: order.id) { [weak self] result in
+                switch result {
+                case .success(let positions):
+                    self?.orders[index].positions = positions
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }

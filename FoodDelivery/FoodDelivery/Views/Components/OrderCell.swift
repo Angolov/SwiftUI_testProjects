@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OrderCell: View {
     
-    @State var order: Order
+    var order: Order
     
     var body: some View {
         HStack {

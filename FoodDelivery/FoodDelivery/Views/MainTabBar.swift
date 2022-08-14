@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabBar: View {
+    
     var body: some View {
         TabView {
             
@@ -21,7 +22,7 @@ struct MainTabBar: View {
                 }
             }
             
-            NavigationView{
+            NavigationView {
                 CartView(viewModel: CartViewModel.shared)
             }
                 .tabItem {
@@ -32,10 +33,7 @@ struct MainTabBar: View {
                 }
             
             NavigationView {
-                let viewModel = ProfileViewModel(profile: AppUser(id: "",
-                                                                  name: "",
-                                                                  phone: 0000000000,
-                                                                  address: ""))
+                let viewModel = ProfileViewModel(profile: SessionManager.shared.userProfile)
                 ProfileView(viewModel: viewModel)
             }
                 .tabItem {

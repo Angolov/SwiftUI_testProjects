@@ -36,6 +36,8 @@ struct ProfileView: View {
                 .padding()
             
         }
+        .padding(.top, 16)
+        .navigationTitle("Профиль")
         .onAppear {
             viewModel.getProfile()
             viewModel.getOrders()
@@ -43,8 +45,6 @@ struct ProfileView: View {
         .onSubmit {
             viewModel.setProfile()
         }
-        .padding(.top, 16)
-        .navigationTitle("Профиль")
         .confirmationDialog(Text("Выбор фото"),
                             isPresented: $showAvatarSelectionDialog,
                             titleVisibility: .visible) {

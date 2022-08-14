@@ -80,6 +80,7 @@ class DatabaseService {
     }
     
     func getOrders(by userID: String?, completion: @escaping (Result<[Order], Error>) -> Void) {
+        
         ordersRef.getDocuments { [weak self] snapshot, error in
             guard let self = self else { return }
             
@@ -94,13 +95,34 @@ class DatabaseService {
                 return
             }
             
-            var orders = [Order]()
-            orders = self.getAllOrders(from: snapshot)
+            var orders = self.getAllOrders(from: snapshot)
+            
             if let userID = userID {
                 orders = self.filter(orders: orders, by: userID)
             }
             
             completion(.success(orders))
+        }
+    }
+    
+    func getPositions(by orderID: String, completion: @escaping (Result<[Position], Error>) -> Void) {
+        let positionsRef = ordersRef.document(orderID).collection("positions")
+        positionsRef.getDocuments { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                let error = DatabaseError.noDataFoundInFirebase
+                completion(.failure(error))
+                return
+            }
+            
+            let positions = self.getAllPositions(from: snapshot)
+            completion(.success(positions))
         }
     }
     
@@ -138,15 +160,23 @@ class DatabaseService {
         completion(.success(positions))
     }
     
+    private func getAllPositions(from snapshot: QuerySnapshot) -> [Position] {
+        var positions = [Position]()
+        for doc in snapshot.documents {
+            if let position = Position(doc: doc) {
+                positions.append(position)
+            }
+        }
+        return positions
+    }
+    
     private func getAllOrders(from snapshot: QuerySnapshot) -> [Order] {
         var orders = [Order]()
-        
         for doc in snapshot.documents {
             if let order = Order(doc: doc){
                 orders.append(order)
             }
         }
-        
         return orders
     }
     
