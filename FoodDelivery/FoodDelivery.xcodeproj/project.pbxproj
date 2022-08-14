@@ -12,6 +12,7 @@
 		5B63571728A2D817006085E3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5B63571628A2D817006085E3 /* FirebaseFirestore */; };
 		5B63571928A2D817006085E3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5B63571828A2D817006085E3 /* FirebaseStorage */; };
 		5B63571B28A2DB55006085E3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B63571A28A2DB55006085E3 /* AuthService.swift */; };
+		5B6C560728A8D50200D088A1 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C560628A8D50200D088A1 /* OrderCell.swift */; };
 		5B8FDDA328A0310500FB72DC /* FoodDeliveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */; };
 		5B8FDDA528A0310500FB72DC /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA428A0310500FB72DC /* AuthView.swift */; };
 		5B8FDDA728A0310700FB72DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8FDDA628A0310700FB72DC /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		5B63571128A2D55B006085E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B63571A28A2DB55006085E3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		5B6C560628A8D50200D088A1 /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		5B8FDD9F28A0310500FB72DC /* FoodDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDeliveryApp.swift; sourceTree = "<group>"; };
 		5B8FDDA428A0310500FB72DC /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				5BB1EEC228A1265300578C60 /* PasswordField.swift */,
 				5BEAD01A28A13D46004FDF4D /* ProductCell.swift */,
 				5BE1CD7428A25FFB00657CA7 /* PositionCell.swift */,
+				5B6C560628A8D50200D088A1 /* OrderCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				5BEAD01528A13B71004FDF4D /* CartView.swift in Sources */,
 				5BAB452D28A814BA002D43A7 /* SessionManager.swift in Sources */,
 				5BEAD02128A146C5004FDF4D /* ProductDetailView.swift in Sources */,
+				5B6C560728A8D50200D088A1 /* OrderCell.swift in Sources */,
 				5BAB451A28A371A9002D43A7 /* AuthViewModel.swift in Sources */,
 				5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */,
 				5BE1CD7328A23CB100657CA7 /* Position.swift in Sources */,

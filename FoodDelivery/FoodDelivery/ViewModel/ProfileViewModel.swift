@@ -9,14 +9,11 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     
-    @Published var profile: AppUser!
+    @Published var profile: AppUser
+    @Published var orders: [Order] = [Order]()
     
     init(profile: AppUser) {
         self.profile = profile
-    }
-    
-    init() {
-        getProfile()
     }
     
     func setProfile() {
@@ -37,6 +34,18 @@ class ProfileViewModel: ObservableObject {
                 
             case .success(let user):
                 self.profile = user
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getOrders() {
+        DatabaseService.shared.getOrders(by: SessionManager.shared.userID) { result in
+            switch result {
+                
+            case .success(let orders):
+                self.orders = orders
             case .failure(let error):
                 print(error.localizedDescription)
             }

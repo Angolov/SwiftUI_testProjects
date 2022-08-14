@@ -30,11 +30,7 @@ struct ProfileView: View {
             addressText
                 .padding(.horizontal)
             
-            // Таблица с заказами
-            List {
-                Text("Ваши заказы будут тут")
-            }
-            .listStyle(.plain)
+            ordersList
             
             quitButton
                 .padding()
@@ -42,6 +38,7 @@ struct ProfileView: View {
         }
         .onAppear {
             viewModel.getProfile()
+            viewModel.getOrders()
         }
         .onSubmit {
             viewModel.setProfile()
@@ -96,6 +93,19 @@ extension ProfileView {
             
             TextField("Адрес", text: $viewModel.profile.address)
         }
+    }
+    
+    private var ordersList: some View {
+        List {
+            if viewModel.orders.count == 0 {
+                Text("Ваши заказы будут тут")
+            } else {
+                ForEach(viewModel.orders, id: \.id) { order in
+                    OrderCell(order: order)
+                }
+            }
+        }
+        .listStyle(.plain)
     }
     
     private var quitButton: some View {

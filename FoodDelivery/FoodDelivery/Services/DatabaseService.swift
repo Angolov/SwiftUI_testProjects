@@ -8,15 +8,23 @@
 import Foundation
 import FirebaseFirestore
 
+// MARK: - DatabaseError enum
+
 enum DatabaseError: Error {
     case noDataFoundInFirebase
     case wrongDataEntryInFirebase
 }
 
+// MARK: - DatabaseService class
+
 class DatabaseService {
+    
+    // MARK: - Singleton
     
     static let shared = DatabaseService()
     private init() {}
+    
+    // MARK: - Properties
     
     private let database = Firestore.firestore()
     private var usersRef: CollectionReference {
@@ -26,6 +34,8 @@ class DatabaseService {
     private var ordersRef: CollectionReference {
         return database.collection("orders")
     }
+    
+    // MARK: - Public methods
     
     func setProfile(user: AppUser, completion: @escaping (Result<AppUser, Error>) -> Void) {
         usersRef.document(user.id).setData(user.representation) { error in
@@ -69,6 +79,31 @@ class DatabaseService {
         }
     }
     
+    func getOrders(by userID: String?, completion: @escaping (Result<[Order], Error>) -> Void) {
+        ordersRef.getDocuments { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                let error = DatabaseError.noDataFoundInFirebase
+                completion(.failure(error))
+                return
+            }
+            
+            var orders = [Order]()
+            orders = self.getAllOrders(from: snapshot)
+            if let userID = userID {
+                orders = self.filter(orders: orders, by: userID)
+            }
+            
+            completion(.success(orders))
+        }
+    }
+    
     // MARK: - Private methods
     
     private func getDataFrom(snapshot: DocumentSnapshot?) throws -> [String : Any] {
@@ -101,5 +136,21 @@ class DatabaseService {
             positionsRef.document(position.id).setData(position.representation)
         }
         completion(.success(positions))
+    }
+    
+    private func getAllOrders(from snapshot: QuerySnapshot) -> [Order] {
+        var orders = [Order]()
+        
+        for doc in snapshot.documents {
+            if let order = Order(doc: doc){
+                orders.append(order)
+            }
+        }
+        
+        return orders
+    }
+    
+    private func filter(orders: [Order], by userID: String) -> [Order] {
+        return orders.filter { $0.userID == userID }
     }
 }

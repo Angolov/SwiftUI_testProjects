@@ -14,4 +14,21 @@ enum OrderStatus: String {
     case inDelivery = "Доставляется"
     case completed = "Выполнен"
     case cancelled = "Отменен"
+    
+    static func getStatusFromString(_ string: String) -> OrderStatus? {
+        switch string {
+        case new.rawValue:
+            return OrderStatus.new
+        case cooking.rawValue:
+            return OrderStatus.cooking
+        case inDelivery.rawValue:
+            return OrderStatus.inDelivery
+        case completed.rawValue:
+            return OrderStatus.completed
+        case cancelled.rawValue:
+            return OrderStatus.cancelled
+        default:
+            return nil
+        }
+    }
 }

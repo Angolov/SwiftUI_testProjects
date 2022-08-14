@@ -34,4 +34,32 @@ struct Order {
         repres["status"] = status.rawValue
         return repres
     }
+    
+    init(id: String = UUID().uuidString,
+         userID: String,
+         positions: [Position] = [Position](),
+         date: Date = Date(),
+         status: OrderStatus) {
+        
+        self.id = id
+        self.userID = userID
+        self.positions = positions
+        self.date = date
+        self.status = status
+    }
+    
+    init?(doc: QueryDocumentSnapshot) {
+        let data = doc.data()
+        
+        guard let id = data["id"] as? String,
+              let userID = data["userID"] as? String,
+              let date = data["date"] as? Timestamp,
+              let statusInString = data["status"] as? String,
+              let orderStatus = OrderStatus.getStatusFromString(statusInString) else { return nil }
+        
+        self.id = id
+        self.userID = userID
+        self.date = date.dateValue()
+        self.status = orderStatus
+    }
 }
