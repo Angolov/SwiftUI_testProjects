@@ -25,16 +25,37 @@ struct AdminOrderView: View {
             Text("Телефон: \(viewModel.user.phone)")
                 .bold()
             Text("Адрес: \(viewModel.user.address)")
-            
-            List {
-                ForEach(viewModel.order.positions, id: \.id) { position in
-                    PositionCell(position: position)
+        }
+        .padding()
+        
+        Picker(selection: $viewModel.order.status) {
+            ForEach(OrderStatus.allCases, id: \.self) { status in
+                Text(status.rawValue)
+            }
+        } label: {
+            Text("Статус заказа")
+        }
+        .pickerStyle(.segmented)
+        .onChange(of: viewModel.order.status) { newStatus in
+            DatabaseService.shared.setOrder(order: viewModel.order) { result in
+                switch result {
+                    
+                case .success(let order):
+                    print(order.status)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-                Text("Итого: \(viewModel.order.cost)")
-                    .font(.title3.bold())
             }
         }
+        
+        List {
+            ForEach(viewModel.order.positions, id: \.id) { position in
+                PositionCell(position: position)
+            }
+            Text("Итого: \(viewModel.order.cost)")
+                .font(.title3.bold())
+        }
         .navigationBarTitleDisplayMode(.inline)
-        .padding()
     }
 }
+

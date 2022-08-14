@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - OrderStatus enum
 
-enum OrderStatus: String {
+enum OrderStatus: String, CaseIterable {
     
     case new = "Новый"
     case cooking = "Готовиться"

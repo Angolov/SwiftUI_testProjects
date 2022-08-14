@@ -30,6 +30,10 @@ class AdminOrdersViewModel: ObservableObject {
         }
     }
     
+    func signOut() {
+        AuthService.shared.signOut()
+    }
+    
     // MARK: - Private methods
     
     private func getPositions() {
