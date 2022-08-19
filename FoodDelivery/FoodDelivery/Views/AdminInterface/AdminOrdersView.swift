@@ -16,6 +16,8 @@ struct AdminOrdersView: View {
     @StateObject private var viewModel = AdminOrdersViewModel()
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var showAddProductView = false
+    
     // MARK: - Body
     
     var body: some View {
@@ -39,6 +41,17 @@ struct AdminOrdersView: View {
                 viewModel.getOrders()
             }
             
+            NavigationLink(destination: AdminAddProductView()) {
+                Text("Добавить товар")
+                    .font(.title2.bold())
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(18)
+                    .padding(.horizontal, 8)
+            }
+            
             Button("Выйти", action: exitButtonTapped)
                 .font(.title2.bold())
                 .foregroundColor(.white)
@@ -46,7 +59,7 @@ struct AdminOrdersView: View {
                 .padding()
                 .background(Color.red)
                 .cornerRadius(18)
-                .padding(8)
+                .padding(.horizontal, 8)
         }
     }
     
