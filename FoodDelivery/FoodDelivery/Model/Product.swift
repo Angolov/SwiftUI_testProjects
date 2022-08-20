@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 // MARK: - Product struct
 
@@ -35,6 +36,22 @@ struct Product {
         self.image = image
         self.price = price
         self.description = description
+    }
+    
+    init?(doc: QueryDocumentSnapshot) {
+        let data = doc.data()
+        
+        guard let id = data["id"] as? String,
+              let title = data["title"] as? String,
+              let price = data["price"] as? Int,
+              let description = data["decription"] as? String else { return nil }
+        
+        self.id = id
+        self.title = title
+        self.price = price
+        self.description = description
+        self.imageUrl = ""
+        self.image = Data()
     }
     
     var representation: [String: Any] {

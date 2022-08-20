@@ -14,13 +14,17 @@ struct ProductCell: View {
     // MARK: - Properties
     
     var product: Product
+    private var productImage: UIImage {
+        guard let baseImage = UIImage(named: "PizzaMargarita") else { return UIImage() }
+        return UIImage(data: product.image) ?? baseImage
+    }
     
     // MARK: - Body
     
     var body: some View {
         
         VStack(spacing: 2) {
-            Image("PizzaMargarita")
+            Image(uiImage: productImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: screen.width * 0.45)

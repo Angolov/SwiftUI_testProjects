@@ -147,7 +147,7 @@ class DatabaseService {
     
     func setProduct(product: Product, completion: @escaping (Result<Product, Error>) -> Void) {
         
-        StorageService.shared.upload(id: product.id, image: product.image) { result in
+        StorageService.shared.uploadProductImage(id: product.id, image: product.image) { result in
             switch result {
                 
             case .success(let sizeInfo):
@@ -164,6 +164,38 @@ class DatabaseService {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+    
+    func getProducts(completion: @escaping (Result<[Product], Error>) -> Void) {
+        
+        self.productsRef.getDocuments { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                let error = DatabaseError.noDataFoundInFirebase
+                completion(.failure(error))
+                return
+            }
+            
+            let docs = snapshot.documents
+            var products = [Product]()
+            
+            for doc in docs {
+                if let product = Product(doc: doc) {
+                    products.append(product)
+                } else {
+                    let error = DatabaseError.wrongDataEntryInFirebase
+                    completion(.failure(error))
+                }
+            }
+            
+            completion(.success(products))
         }
     }
     

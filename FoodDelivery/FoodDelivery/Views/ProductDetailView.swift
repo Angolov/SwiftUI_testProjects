@@ -19,16 +19,28 @@ struct ProductDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    var productImage: UIImage {
+        guard let baseImage = UIImage(named: "PizzaMargarita") else { return UIImage() }
+        return UIImage(data: viewModel.product.image) ?? baseImage
+    }
+    
     // MARK: - Body
     
     var body: some View {
         
         VStack {
             VStack(alignment: .leading) {
-                Image("\(viewModel.product.imageUrl)")
-                    .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: 260)
-                    .aspectRatio(contentMode: .fit)
+                
+                VStack(alignment: .center) {
+                    Image(uiImage: productImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: screen.width - 50,
+                               maxHeight: screen.width - 50)
+                        .cornerRadius(25)
+                        .padding()
+                }
+                
                 HStack {
                     Text("\(viewModel.product.title)")
                         .font(.title2.bold())

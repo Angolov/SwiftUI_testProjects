@@ -117,8 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				5B6C560928A95D0F00D088A1 /* AdminOrdersView.swift */,
-				5BDEC26228ACB206001C1762 /* AdminAddProductView.swift */,
 				5B6C560D28A9631B00D088A1 /* AdminOrderView.swift */,
+				5BDEC26228ACB206001C1762 /* AdminAddProductView.swift */,
 			);
 			path = AdminInterface;
 			sourceTree = "<group>";

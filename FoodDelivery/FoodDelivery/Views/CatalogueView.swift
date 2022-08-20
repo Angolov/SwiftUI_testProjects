@@ -12,6 +12,7 @@ struct CatalogueView: View {
     
     // MARK: - Properties
     
+    @StateObject private var viewModel = CatalogueViewModel.shared
     let layout = [GridItem(.adaptive(minimum: screen.width / 2.2))]
     
     // MARK: - Body
@@ -23,7 +24,15 @@ struct CatalogueView: View {
             Section("Популярное") {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: layout, spacing: 16) {
-                        productCells
+                        ForEach(viewModel.products, id: \.id) { item in
+                            NavigationLink {
+                                let viewModel = ProductDetailViewModel(product: item)
+                                ProductDetailView(viewModel: viewModel)
+                            } label: {
+                                ProductCell(product: item)
+                                    .foregroundColor(.black)
+                            }
+                        }
                     }
                     .padding(8)
                     .padding(.vertical, 8)
@@ -33,7 +42,15 @@ struct CatalogueView: View {
             Section("Пицца") {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: layout) {
-                        productCells
+                        ForEach(viewModel.pizzas, id: \.id) { item in
+                            NavigationLink {
+                                let viewModel = ProductDetailViewModel(product: item)
+                                ProductDetailView(viewModel: viewModel)
+                            } label: {
+                                ProductCell(product: item)
+                                    .foregroundColor(.black)
+                            }
+                        }
                     }
                     .padding(8)
                     .padding(.vertical, 8)
@@ -43,19 +60,8 @@ struct CatalogueView: View {
             
         }
         .navigationTitle("Каталог")
-    }
-    
-    // MARK: - Private methods
-    
-    private var productCells: some View {
-        ForEach(CatalogueViewModel.shared.products, id: \.id) { item in
-            NavigationLink {
-                let viewModel = ProductDetailViewModel(product: item)
-                ProductDetailView(viewModel: viewModel)
-            } label: {
-                ProductCell(product: item)
-                    .foregroundColor(.black)
-            }
+        .onAppear {
+            viewModel.getProducts()
         }
     }
 }
