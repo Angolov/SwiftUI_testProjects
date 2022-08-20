@@ -7,13 +7,19 @@
 
 import SwiftUI
 
+// MARK: - AdminAddProductView struct
+
 struct AdminAddProductView: View {
+    
+    // MARK: - Properties
     
     @State private var showImagePicker = false
     @State private var productImage = UIImage()
-    @State private var productTitle = ""
-    @State private var productPrice: Int? = nil
-    @State private var productDescript = ""
+    @StateObject private var viewModel = AdminAddProductViewModel()
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    // MARK: - Body
     
     var body: some View {
         VStack(alignment: .center) {
@@ -27,12 +33,12 @@ struct AdminAddProductView: View {
                 .onTapGesture {
                     showImagePicker = true
                 }
-            TextField("Название нового продукта", text: $productTitle)
+            TextField("Название нового продукта", text: $viewModel.productTitle)
                 .padding()
-            TextField("Цена продукта", value: $productPrice, format: .number)
+            TextField("Цена продукта", value: $viewModel.productPrice, format: .number)
                 .keyboardType(.numberPad)
                 .padding()
-            TextField("Описание нового продукта", text: $productDescript)
+            TextField("Описание нового продукта", text: $viewModel.productDescript)
                 .padding()
             
             Spacer()
@@ -53,6 +59,8 @@ struct AdminAddProductView: View {
         }
     }
     
+    // MARK: - UI elements
+    
     private var backgroundView: some View {
         ZStack {
             Color("LightGray")
@@ -63,14 +71,19 @@ struct AdminAddProductView: View {
         }
     }
     
+    // MARK: - Private methods
+    
     private func saveProductButtonTapped() {
-        let newProduct = Product(id: "",
-                                 title: productTitle,
-                                 imageUrl: "",
-                                 price: productPrice ?? 0,
-                                 description: productDescript)
-        
-        print("Product \(newProduct.title) saved")
+        let imageData = productImage.jpegData(compressionQuality: 0.15)
+        viewModel.saveProductToDatabase(imageData: imageData) { result in
+            switch result {
+            case .success(let string):
+                print(string)
+                self.presentationMode.wrappedValue.dismiss()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

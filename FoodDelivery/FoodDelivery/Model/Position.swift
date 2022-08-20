@@ -49,7 +49,8 @@ struct Position: Identifiable {
               let title = data["title"] as? String,
               let price = data["price"] as? Int,
               let count = data["count"] as? Int else { return nil }
-        let product = Product(id: "", title: title, imageUrl: "", price: price, description: "")
+        
+        let product = Product(id: "", title: title, price: price, description: "")
         
         self.id = id
         self.product = product

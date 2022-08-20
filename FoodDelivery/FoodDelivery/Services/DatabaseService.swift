@@ -13,6 +13,7 @@ import FirebaseFirestore
 enum DatabaseError: Error {
     case noDataFoundInFirebase
     case wrongDataEntryInFirebase
+    case dataWasNotSaved
 }
 
 // MARK: - DatabaseService class
@@ -33,6 +34,10 @@ class DatabaseService {
     
     private var ordersRef: CollectionReference {
         return database.collection("orders")
+    }
+    
+    private var productsRef: CollectionReference {
+        return database.collection("products")
     }
     
     // MARK: - Public methods
@@ -137,6 +142,28 @@ class DatabaseService {
             
             let positions = self.getAllPositions(from: snapshot)
             completion(.success(positions))
+        }
+    }
+    
+    func setProduct(product: Product, completion: @escaping (Result<Product, Error>) -> Void) {
+        
+        StorageService.shared.upload(id: product.id, image: product.image) { result in
+            switch result {
+                
+            case .success(let sizeInfo):
+                print(sizeInfo)
+                
+                self.productsRef.document(product.id).setData(product.representation) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        completion(.failure(DatabaseError.dataWasNotSaved))
+                    }
+                    completion(.success(product))
+                }
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     

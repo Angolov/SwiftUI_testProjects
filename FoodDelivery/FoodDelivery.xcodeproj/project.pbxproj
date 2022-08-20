@@ -28,6 +28,8 @@
 		5BAB452928A80888002D43A7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB452828A80887002D43A7 /* Order.swift */; };
 		5BAB452B28A80BFC002D43A7 /* OrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB452A28A80BFC002D43A7 /* OrderStatus.swift */; };
 		5BAB452D28A814BA002D43A7 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAB452C28A814BA002D43A7 /* SessionManager.swift */; };
+		5BB1723C28B0FB0D00439321 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1723B28B0FB0D00439321 /* StorageService.swift */; };
+		5BB1723E28B10A9B00439321 /* AdminAddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1723D28B10A9B00439321 /* AdminAddProductViewModel.swift */; };
 		5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC028A1262800578C60 /* EmailField.swift */; };
 		5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC228A1265300578C60 /* PasswordField.swift */; };
 		5BDEC26128ACAFE9001C1762 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEC26028ACAFE9001C1762 /* ImagePicker.swift */; };
@@ -66,6 +68,8 @@
 		5BAB452828A80887002D43A7 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		5BAB452A28A80BFC002D43A7 /* OrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatus.swift; sourceTree = "<group>"; };
 		5BAB452C28A814BA002D43A7 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		5BB1723B28B0FB0D00439321 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		5BB1723D28B10A9B00439321 /* AdminAddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddProductViewModel.swift; sourceTree = "<group>"; };
 		5BB1EEC028A1262800578C60 /* EmailField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailField.swift; sourceTree = "<group>"; };
 		5BB1EEC228A1265300578C60 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		5BDEC26028ACAFE9001C1762 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 			children = (
 				5B63571A28A2DB55006085E3 /* AuthService.swift */,
 				5BAB451D28A3D40F002D43A7 /* DatabaseService.swift */,
+				5BB1723B28B0FB0D00439321 /* StorageService.swift */,
 				5BAB452C28A814BA002D43A7 /* SessionManager.swift */,
 			);
 			path = Services;
@@ -207,6 +212,7 @@
 				5BAB451F28A3F8BE002D43A7 /* ProfileViewModel.swift */,
 				5B6C560B28A9602D00D088A1 /* AdminOrdersViewModel.swift */,
 				5B6C560F28A9632A00D088A1 /* AdminOrderViewModel.swift */,
+				5BB1723D28B10A9B00439321 /* AdminAddProductViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -307,10 +313,12 @@
 				5BAB452D28A814BA002D43A7 /* SessionManager.swift in Sources */,
 				5BEAD02128A146C5004FDF4D /* ProductDetailView.swift in Sources */,
 				5B6C560728A8D50200D088A1 /* OrderCell.swift in Sources */,
+				5BB1723E28B10A9B00439321 /* AdminAddProductViewModel.swift in Sources */,
 				5BAB451A28A371A9002D43A7 /* AuthViewModel.swift in Sources */,
 				5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */,
 				5B6C560A28A95D0F00D088A1 /* AdminOrdersView.swift in Sources */,
 				5BE1CD7328A23CB100657CA7 /* Position.swift in Sources */,
+				5BB1723C28B0FB0D00439321 /* StorageService.swift in Sources */,
 				5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */,
 				5BE1CD6F28A17DA200657CA7 /* ProductDetailViewModel.swift in Sources */,
 				5BEAD01128A13908004FDF4D /* MainTabBar.swift in Sources */,
