@@ -53,7 +53,6 @@ class ProfileViewModel: ObservableObject {
             switch result {
             case .success(let orders):
                 self?.orders = orders
-                self?.getPositions()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -62,20 +61,5 @@ class ProfileViewModel: ObservableObject {
     
     func signOut() {
         AuthService.shared.signOut()
-    }
-    
-    // MARK: - Private methods
-    
-    private func getPositions() {
-        for (index, order) in orders.enumerated() {
-            DatabaseService.shared.getPositions(by: order.id) { [weak self] result in
-                switch result {
-                case .success(let positions):
-                    self?.orders[index].positions = positions
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
     }
 }

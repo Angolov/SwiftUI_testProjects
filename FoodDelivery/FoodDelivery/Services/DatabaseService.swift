@@ -114,7 +114,13 @@ class DatabaseService {
     
     func getOrders(by userID: String?, completion: @escaping (Result<[Order], Error>) -> Void) {
         
-        ordersRef.getDocuments { [weak self] snapshot, error in
+        var query: Query = ordersRef
+        
+        if let userID = userID {
+            query = ordersRef.whereField("userID", isEqualTo: userID)
+        }
+        
+        query.getDocuments { [weak self] snapshot, error in
             guard let self = self else { return }
             
             if let error = error {
@@ -128,17 +134,12 @@ class DatabaseService {
                 return
             }
             
-            var orders = self.getAllOrders(from: snapshot)
-            
-            if let userID = userID {
-                orders = self.filter(orders: orders, by: userID)
-            }
-            
+            let orders = self.parseOrders(from: snapshot)
             completion(.success(orders))
         }
     }
     
-    private func getAllOrders(from snapshot: QuerySnapshot) -> [Order] {
+    private func parseOrders(from snapshot: QuerySnapshot) -> [Order] {
         var orders = [Order]()
         for doc in snapshot.documents {
             if let order = Order(doc: doc) {
@@ -148,11 +149,7 @@ class DatabaseService {
         return orders
     }
     
-    private func filter(orders: [Order], by userID: String) -> [Order] {
-        return orders.filter { $0.userID == userID }
-    }
-    
-    func getPositions(by orderID: String, completion: @escaping (Result<[Position], Error>) -> Void) {
+    func getPositions(for orderID: String, completion: @escaping (Result<[Position], Error>) -> Void) {
         let positionsRef = ordersRef.document(orderID).collection("positions")
         positionsRef.getDocuments { [weak self] snapshot, error in
             guard let self = self else { return }
@@ -168,12 +165,12 @@ class DatabaseService {
                 return
             }
             
-            let positions = self.getAllPositions(from: snapshot)
+            let positions = self.parsePositions(from: snapshot)
             completion(.success(positions))
         }
     }
     
-    private func getAllPositions(from snapshot: QuerySnapshot) -> [Position] {
+    private func parsePositions(from snapshot: QuerySnapshot) -> [Position] {
         var positions = [Position]()
         for doc in snapshot.documents {
             if let position = Position(doc: doc) {
@@ -211,7 +208,8 @@ class DatabaseService {
     
     func getProducts(completion: @escaping (Result<[Product], Error>) -> Void) {
         
-        self.productsRef.getDocuments { snapshot, error in
+        self.productsRef.getDocuments { [weak self] snapshot, error in
+            guard let self = self else { return }
             
             if let error = error {
                 completion(.failure(error))
@@ -224,19 +222,18 @@ class DatabaseService {
                 return
             }
             
-            let docs = snapshot.documents
-            var products = [Product]()
-            
-            for doc in docs {
-                if let product = Product(doc: doc) {
-                    products.append(product)
-                } else {
-                    let error = DatabaseError.wrongDataEntryInFirebase
-                    completion(.failure(error))
-                }
-            }
-            
+            let products = self.parseProducts(from: snapshot)
             completion(.success(products))
         }
+    }
+    
+    private func parseProducts(from snapshot: QuerySnapshot) -> [Product] {
+        var products = [Product]()
+        for doc in snapshot.documents {
+            if let product = Product(doc: doc) {
+                products.append(product)
+            }
+        }
+        return products
     }
 }

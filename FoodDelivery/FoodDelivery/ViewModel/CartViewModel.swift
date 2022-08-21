@@ -46,7 +46,7 @@ class CartViewModel: ObservableObject {
             switch result {
             case .success(let order):
                 self?.messageTitle = "Спасибо"
-                self?.messageText = "Ваш заказ на сумму \(order.cost) ₽ создан!"
+                self?.messageText = "Ваш заказ на сумму \(order.total) ₽ создан!"
                 self?.positions = [Position]()
                 
             case .failure(let error):

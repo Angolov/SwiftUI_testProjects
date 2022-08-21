@@ -16,26 +16,29 @@ struct Order {
     
     var id = UUID().uuidString
     var userID: String
-    var positions = [Position]()
+    var total = 0
     var date = Date()
     var status: OrderStatus
     
-    // MARK: - Computed properties
-    
-    var cost: Int {
-        var sum = 0
-        
-        for position in positions {
-            sum += position.cost
+    var positions = [Position]() {
+        didSet {
+            if positions.count > 0 {
+                var sum = 0
+                
+                for position in positions {
+                    sum += position.cost
+                }
+                
+                self.total = sum
+            }
         }
-        
-        return sum
     }
     
     var representation: [String: Any] {
         var repres = [String: Any]()
         repres["id"] = id
         repres["userID"] = userID
+        repres["total"] = total
         repres["date"] = Timestamp(date: date)
         repres["status"] = status.rawValue
         return repres
@@ -54,6 +57,16 @@ struct Order {
         self.positions = positions
         self.date = date
         self.status = status
+        
+        if positions.count > 0 {
+            var sum = 0
+            
+            for position in positions {
+                sum += position.cost
+            }
+            
+            self.total = sum
+        }
     }
     
     init?(doc: QueryDocumentSnapshot) {
@@ -61,12 +74,14 @@ struct Order {
         
         guard let id = data["id"] as? String,
               let userID = data["userID"] as? String,
+              let total = data["total"] as? Int,
               let date = data["date"] as? Timestamp,
               let statusInString = data["status"] as? String,
               let orderStatus = OrderStatus.getStatusFromString(statusInString) else { return nil }
         
         self.id = id
         self.userID = userID
+        self.total = total
         self.date = date.dateValue()
         self.status = orderStatus
     }

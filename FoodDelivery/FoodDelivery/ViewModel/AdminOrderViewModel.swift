@@ -21,11 +21,29 @@ class AdminOrderViewModel: ObservableObject {
     init(order: Order) {
         self.order = order
         
+        getUserProfile()
+        getOrderPositions()
+    }
+    
+    // MARK: - Private methods
+    
+    private func getUserProfile() {
         DatabaseService.shared.getUserProfile(by: order.userID) { result in
             switch result {
                 
             case .success(let user):
                 self.user = user
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func getOrderPositions() {
+        DatabaseService.shared.getPositions(for: order.id) { [weak self] result in
+            switch result {
+            case .success(let positions):
+                self?.order.positions = positions
             case .failure(let error):
                 print(error.localizedDescription)
             }

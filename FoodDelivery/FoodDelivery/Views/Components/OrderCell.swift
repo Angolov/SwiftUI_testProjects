@@ -20,7 +20,7 @@ struct OrderCell: View {
     var body: some View {
         HStack {
             Text("\(order.date)")
-            Text("\(order.cost)")
+            Text("\(order.total)")
                 .bold()
                 .frame(width: 90)
             Text("\(order.status.rawValue)")
