@@ -21,7 +21,7 @@ class AdminOrderViewModel: ObservableObject {
     init(order: Order) {
         self.order = order
         
-        DatabaseService.shared.getProfile(by: order.userID) { result in
+        DatabaseService.shared.getUserProfile(by: order.userID) { result in
             switch result {
                 
             case .success(let user):

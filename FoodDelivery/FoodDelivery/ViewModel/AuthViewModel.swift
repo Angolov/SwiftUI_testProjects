@@ -100,7 +100,7 @@ class AuthViewModel: ObservableObject {
                               phone: 0,
                               address: "")
         
-        DatabaseService.shared.setProfile(user: appUser) { result in
+        DatabaseService.shared.setUserProfile(for: appUser) { result in
             switch result {
                 
             case .success(_):

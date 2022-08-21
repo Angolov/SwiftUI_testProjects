@@ -28,7 +28,7 @@ class SessionManager {
     // MARK: - Private methods
     
     private func getUserProfile() {
-        DatabaseService.shared.getProfile { [weak self] result in
+        DatabaseService.shared.getUserProfile { [weak self] result in
             switch result {
             case .success(let profile):
                 self?.userProfile = profile

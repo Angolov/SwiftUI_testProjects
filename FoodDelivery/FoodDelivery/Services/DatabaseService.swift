@@ -28,21 +28,12 @@ class DatabaseService {
     // MARK: - Properties
     
     private let database = Firestore.firestore()
-    private var usersRef: CollectionReference {
-        return database.collection("users")
-    }
     
-    private var ordersRef: CollectionReference {
-        return database.collection("orders")
-    }
+    // MARK: - Profile management
     
-    private var productsRef: CollectionReference {
-        return database.collection("products")
-    }
+    private var usersRef: CollectionReference { database.collection("users") }
     
-    // MARK: - Public methods
-    
-    func setProfile(user: AppUser, completion: @escaping (Result<AppUser, Error>) -> Void) {
+    func setUserProfile(for user: AppUser, completion: @escaping (Result<AppUser, Error>) -> Void) {
         usersRef.document(user.id).setData(user.representation) { error in
             if let error = error {
                 completion(.failure(error))
@@ -52,21 +43,8 @@ class DatabaseService {
         }
     }
     
-    func getProfile(completion: @escaping (Result<AppUser, Error>) -> Void) {
-        usersRef.document(SessionManager.shared.userID).getDocument { [weak self] snapshot, error in
-            guard let self = self else { return }
-            do {
-                let data = try self.getDataFrom(snapshot: snapshot)
-                let user = try self.parseUserFrom(data: data)
-                completion(.success(user))
-            }
-            catch (let error) {
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func getProfile(by userID: String, completion: @escaping (Result<AppUser, Error>) -> Void) {
+    func getUserProfile(by id: String = "", completion: @escaping (Result<AppUser, Error>) -> Void) {
+        let userID = id == "" ? SessionManager.shared.userID : id
         usersRef.document(userID).getDocument { [weak self] snapshot, error in
             guard let self = self else { return }
             do {
@@ -80,14 +58,39 @@ class DatabaseService {
         }
     }
     
+    private func getDataFrom(snapshot: DocumentSnapshot?) throws -> [String : Any] {
+        guard let data = snapshot?.data()
+        else {
+            throw DatabaseError.noDataFoundInFirebase
+        }
+        
+        return data
+    }
+    
+    private func parseUserFrom(data: [String : Any]) throws -> AppUser {
+        guard let id = data["id"] as? String,
+              let name = data["name"] as? String,
+              let phone = data["phone"] as? Int,
+              let address = data["address"] as? String
+        else {
+            throw DatabaseError.wrongDataEntryInFirebase
+        }
+        
+        return AppUser(id: id, name: name, phone: phone, address: address)
+    }
+    
+    // MARK: - Orders management
+    
+    private var ordersRef: CollectionReference { database.collection("orders") }
+    
     func setOrder(order: Order, completion: @escaping (Result<Order, Error>) -> Void) {
-        ordersRef.document(order.id).setData(order.representation) { error in
+        ordersRef.document(order.id).setData(order.representation) { [weak self] error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
             
-            self.setPositions(to: order.id, positions: order.positions) { result in
+            self?.setPositions(to: order.id, positions: order.positions) { result in
                 switch result {
                 case .success(_):
                     completion(.success(order))
@@ -96,6 +99,17 @@ class DatabaseService {
                 }
             }
         }
+    }
+    
+    private func setPositions(to orderID: String,
+                              positions: [Position],
+                              completion: @escaping (Result<[Position], Error>) -> Void) {
+        
+        let positionsRef = ordersRef.document(orderID).collection("positions")
+        for position in positions {
+            positionsRef.document(position.id).setData(position.representation)
+        }
+        completion(.success(positions))
     }
     
     func getOrders(by userID: String?, completion: @escaping (Result<[Order], Error>) -> Void) {
@@ -124,6 +138,20 @@ class DatabaseService {
         }
     }
     
+    private func getAllOrders(from snapshot: QuerySnapshot) -> [Order] {
+        var orders = [Order]()
+        for doc in snapshot.documents {
+            if let order = Order(doc: doc) {
+                orders.append(order)
+            }
+        }
+        return orders
+    }
+    
+    private func filter(orders: [Order], by userID: String) -> [Order] {
+        return orders.filter { $0.userID == userID }
+    }
+    
     func getPositions(by orderID: String, completion: @escaping (Result<[Position], Error>) -> Void) {
         let positionsRef = ordersRef.document(orderID).collection("positions")
         positionsRef.getDocuments { [weak self] snapshot, error in
@@ -144,6 +172,20 @@ class DatabaseService {
             completion(.success(positions))
         }
     }
+    
+    private func getAllPositions(from snapshot: QuerySnapshot) -> [Position] {
+        var positions = [Position]()
+        for doc in snapshot.documents {
+            if let position = Position(doc: doc) {
+                positions.append(position)
+            }
+        }
+        return positions
+    }
+    
+    // MARK: - Products management
+    
+    private var productsRef: CollectionReference { database.collection("products") }
     
     func setProduct(product: Product, completion: @escaping (Result<Product, Error>) -> Void) {
         
@@ -169,8 +211,7 @@ class DatabaseService {
     
     func getProducts(completion: @escaping (Result<[Product], Error>) -> Void) {
         
-        self.productsRef.getDocuments { [weak self] snapshot, error in
-            guard let self = self else { return }
+        self.productsRef.getDocuments { snapshot, error in
             
             if let error = error {
                 completion(.failure(error))
@@ -197,63 +238,5 @@ class DatabaseService {
             
             completion(.success(products))
         }
-    }
-    
-    // MARK: - Private methods
-    
-    private func getDataFrom(snapshot: DocumentSnapshot?) throws -> [String : Any] {
-        guard let data = snapshot?.data()
-        else {
-            throw DatabaseError.noDataFoundInFirebase
-        }
-        
-        return data
-    }
-    
-    private func parseUserFrom(data: [String : Any]) throws -> AppUser {
-        guard let id = data["id"] as? String,
-              let name = data["name"] as? String,
-              let phone = data["phone"] as? Int,
-              let address = data["address"] as? String
-        else {
-            throw DatabaseError.wrongDataEntryInFirebase
-        }
-        
-        return AppUser(id: id, name: name, phone: phone, address: address)
-    }
-    
-    private func setPositions(to orderID: String,
-                      positions: [Position],
-                      completion: @escaping (Result<[Position], Error>) -> Void) {
-        
-        let positionsRef = ordersRef.document(orderID).collection("positions")
-        for position in positions {
-            positionsRef.document(position.id).setData(position.representation)
-        }
-        completion(.success(positions))
-    }
-    
-    private func getAllPositions(from snapshot: QuerySnapshot) -> [Position] {
-        var positions = [Position]()
-        for doc in snapshot.documents {
-            if let position = Position(doc: doc) {
-                positions.append(position)
-            }
-        }
-        return positions
-    }
-    
-    private func getAllOrders(from snapshot: QuerySnapshot) -> [Order] {
-        var orders = [Order]()
-        for doc in snapshot.documents {
-            if let order = Order(doc: doc){
-                orders.append(order)
-            }
-        }
-        return orders
-    }
-    
-    private func filter(orders: [Order], by userID: String) -> [Order] {
-        return orders.filter { $0.userID == userID }
     }
 }
