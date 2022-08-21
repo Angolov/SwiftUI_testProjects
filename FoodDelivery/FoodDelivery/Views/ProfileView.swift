@@ -119,12 +119,12 @@ extension ProfileView {
             Text("Выйти")
                 .font(.title3)
                 .bold()
+                .padding(12)
+                .padding(.horizontal)
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(20)
         }
-        .padding(12)
-        .padding(.horizontal)
-        .background(Color.red)
-        .foregroundColor(.white)
-        .cornerRadius(20)
     }
 }
 

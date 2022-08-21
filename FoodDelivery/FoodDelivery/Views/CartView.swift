@@ -66,22 +66,26 @@ extension CartView {
     }
     
     private var cancelButton: some View {
-        Button("Отменить", action: cancelOrderTapped)
-            .font(.body.bold())
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.red)
-            .cornerRadius(24)
+        Button(action: cancelOrderTapped) {
+            Text("Отменить")
+                .font(.body.bold())
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.red)
+                .cornerRadius(24)
+        }
     }
     
     private var orderButton: some View {
-        Button("Заказать", action: confirmOrderTapped)
-            .font(.body.bold())
-            .padding()
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .background(Color.green)
-            .cornerRadius(24)
+        Button(action: confirmOrderTapped) {
+            Text("Заказать")
+                .font(.body.bold())
+                .padding()
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .background(Color.green)
+                .cornerRadius(24)
+        }
     }
 }
 

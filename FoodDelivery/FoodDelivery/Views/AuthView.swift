@@ -115,13 +115,13 @@ extension AuthView {
     private var proceedButton: some View {
         Button(action: proceedButtonTapped) {
             Text(showRegistrationForm ? "Создать аккаунт" : "Войти")
+                .font(.title3.bold())
+                .foregroundColor(Color("DarkBrown"))
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(buttonColorGradient)
+                .cornerRadius(12)
         }
-        .font(.title3.bold())
-        .foregroundColor(Color("DarkBrown"))
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(buttonColorGradient)
-        .cornerRadius(12)
     }
     
     private var buttonColorGradient: some View {
@@ -133,12 +133,12 @@ extension AuthView {
     private var formSwitchButton: some View {
         Button(action: formSwitchButtonTapped) {
             Text(showRegistrationForm ? "Уже есть аккаунт" : "Еще не с нами?")
+                .font(.title3.bold())
+                .foregroundColor(Color("DarkBrown"))
+                .padding(.horizontal)
+                .frame(maxWidth: .infinity)
+                .cornerRadius(12)
         }
-        .font(.title3.bold())
-        .foregroundColor(Color("DarkBrown"))
-        .padding(.horizontal)
-        .frame(maxWidth: .infinity)
-        .cornerRadius(12)
     }
     
     private var backgroundImage: some View {

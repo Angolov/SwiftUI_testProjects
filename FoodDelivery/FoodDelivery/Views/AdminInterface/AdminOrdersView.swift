@@ -33,7 +33,6 @@ struct AdminOrdersView: View {
             .navigationTitle("Все заказы")
             .listStyle(.plain)
             .onAppear {
-                print("on appear")
                 viewModel.getOrders()
             }
             .refreshable {
@@ -52,14 +51,16 @@ struct AdminOrdersView: View {
                     .padding(.horizontal, 8)
             }
             
-            Button("Выйти", action: exitButtonTapped)
-                .font(.title2.bold())
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.red)
-                .cornerRadius(18)
-                .padding(.horizontal, 8)
+            Button(action: exitButtonTapped) {
+                Text("Выйти")
+                    .font(.title2.bold())
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(18)
+                    .padding(.horizontal, 8)
+            }
         }
     }
     

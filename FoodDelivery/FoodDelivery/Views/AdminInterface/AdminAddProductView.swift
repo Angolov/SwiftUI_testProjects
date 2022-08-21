@@ -43,13 +43,15 @@ struct AdminAddProductView: View {
             
             Spacer()
             
-            Button("Сохранить товар", action: saveProductButtonTapped)
-                .font(.title2.bold())
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.green)
-                .cornerRadius(18)
+            Button(action: saveProductButtonTapped) {
+                Text("Сохранить товар")
+                    .font(.title2.bold())
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(18)
+            }
         }
         .padding()
         .navigationTitle("Добавить товар")
