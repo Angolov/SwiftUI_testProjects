@@ -12,7 +12,7 @@ struct CatalogueView: View {
     
     // MARK: - Properties
     
-    @StateObject private var viewModel = CatalogueViewModel.shared
+    @StateObject private var viewModel = CatalogueViewModel()
     let layout = [GridItem(.adaptive(minimum: screen.width / 2.2))]
     
     // MARK: - Body
@@ -24,7 +24,7 @@ struct CatalogueView: View {
             Section("Популярное") {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: layout, spacing: 16) {
-                        ForEach(viewModel.products, id: \.id) { item in
+                        ForEach(viewModel.popularProducts, id: \.id) { item in
                             NavigationLink {
                                 let viewModel = ProductDetailViewModel(product: item)
                                 ProductDetailView(viewModel: viewModel)
@@ -42,7 +42,7 @@ struct CatalogueView: View {
             Section("Пицца") {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: layout) {
-                        ForEach(viewModel.pizzas, id: \.id) { item in
+                        ForEach(viewModel.allProducts, id: \.id) { item in
                             NavigationLink {
                                 let viewModel = ProductDetailViewModel(product: item)
                                 ProductDetailView(viewModel: viewModel)

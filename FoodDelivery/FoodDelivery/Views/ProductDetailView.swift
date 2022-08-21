@@ -93,7 +93,6 @@ struct ProductDetailView: View {
         
         let product = Product(id: viewModel.product.id,
                               title: "\(viewModel.product.title) \(size.lowercased())",
-                              imageUrl: viewModel.product.imageUrl,
                               price: viewModel.getPrice(size: size),
                               description: viewModel.product.description)
         
@@ -110,7 +109,6 @@ struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let testProduct = Product(id: "1",
                                   title: "Пицца Маргарита",
-                                  imageUrl: "PizzaMargarita",
                                   price: 450,
                                   description: "Самая простая пицца")
         let viewModel = ProductDetailViewModel(product: testProduct)

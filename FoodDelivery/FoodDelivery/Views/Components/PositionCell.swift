@@ -38,7 +38,6 @@ struct PositionCell_Previews: PreviewProvider {
         PositionCell(position: Position(id: UUID().uuidString,
                                         product: Product(id: "1",
                                                          title: "Пицца Маргарита",
-                                                         imageUrl: "PizzaMargarita",
                                                          price: 450,
                                                          description: "Самая простая пицца"),
                                         count: 3))

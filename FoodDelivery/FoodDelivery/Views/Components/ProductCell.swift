@@ -52,7 +52,6 @@ struct ProductCell_Previews: PreviewProvider {
     static var previews: some View {
         ProductCell(product: Product(id: "1",
                                      title: "Пицца Маргарита",
-                                     imageUrl: "PizzaMargarita",
                                      price: 450,
                                      description: "Самая простая пицца"))
     }

@@ -32,6 +32,7 @@
 		5BB1723E28B10A9B00439321 /* AdminAddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1723D28B10A9B00439321 /* AdminAddProductViewModel.swift */; };
 		5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC028A1262800578C60 /* EmailField.swift */; };
 		5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC228A1265300578C60 /* PasswordField.swift */; };
+		5BC0847928B24BBF004B9C0F /* ProductCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0847828B24BBF004B9C0F /* ProductCategory.swift */; };
 		5BDEC26128ACAFE9001C1762 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEC26028ACAFE9001C1762 /* ImagePicker.swift */; };
 		5BDEC26328ACB206001C1762 /* AdminAddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEC26228ACB206001C1762 /* AdminAddProductView.swift */; };
 		5BE1CD6F28A17DA200657CA7 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */; };
@@ -72,6 +73,7 @@
 		5BB1723D28B10A9B00439321 /* AdminAddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddProductViewModel.swift; sourceTree = "<group>"; };
 		5BB1EEC028A1262800578C60 /* EmailField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailField.swift; sourceTree = "<group>"; };
 		5BB1EEC228A1265300578C60 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		5BC0847828B24BBF004B9C0F /* ProductCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategory.swift; sourceTree = "<group>"; };
 		5BDEC26028ACAFE9001C1762 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5BDEC26228ACB206001C1762 /* AdminAddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddProductView.swift; sourceTree = "<group>"; };
 		5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				5BEAD01828A13C8C004FDF4D /* Product.swift */,
+				5BC0847828B24BBF004B9C0F /* ProductCategory.swift */,
 				5BE1CD7228A23CB100657CA7 /* Position.swift */,
 				5BAB452828A80887002D43A7 /* Order.swift */,
 				5BAB452A28A80BFC002D43A7 /* OrderStatus.swift */,
@@ -299,6 +302,7 @@
 				5BEAD01E28A143D8004FDF4D /* CatalogueViewModel.swift in Sources */,
 				5BEAD01728A13B8A004FDF4D /* ProfileView.swift in Sources */,
 				5BE1CD7528A25FFB00657CA7 /* PositionCell.swift in Sources */,
+				5BC0847928B24BBF004B9C0F /* ProductCategory.swift in Sources */,
 				5B6C561028A9632A00D088A1 /* AdminOrderViewModel.swift in Sources */,
 				5B6C560E28A9631B00D088A1 /* AdminOrderView.swift in Sources */,
 				5BE1CD7128A23C9900657CA7 /* CartViewModel.swift in Sources */,
