@@ -85,10 +85,7 @@ extension ProfileView {
             TextField("Имя", text: $viewModel.profile.name)
                 .font(.body.bold())
             
-            HStack {
-                Text("+7")
-                TextField("Телефон", value: $viewModel.profile.phone, format: .number)
-            }
+            TextField("Телефон", text: $viewModel.profile.phone)
         }
     }
     
@@ -158,7 +155,7 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         
         let name = "Имя Фамилия"
-        let phone = 9195191919
+        let phone = "9195191919"
         let address = "Россия, Московская область, г. Владимир, ул. Ленина д.2, кв.10"
         let viewModel = ProfileViewModel(profile: AppUser(id: "", name: name, phone: phone, address: address))
         

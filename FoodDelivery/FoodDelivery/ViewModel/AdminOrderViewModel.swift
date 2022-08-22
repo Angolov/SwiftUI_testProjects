@@ -14,7 +14,7 @@ class AdminOrderViewModel: ObservableObject {
     // MARK: - Properties
     
     @Published var order: Order
-    @Published var user = AppUser(id: "", name: "", phone: 0, address: "")
+    @Published var user = AppUser(id: "", name: "", phone: "", address: "")
     
     // MARK: - Init
     

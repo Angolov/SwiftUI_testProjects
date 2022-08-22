@@ -33,6 +33,7 @@
 		5BB1EEC128A1262800578C60 /* EmailField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC028A1262800578C60 /* EmailField.swift */; };
 		5BB1EEC328A1265300578C60 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1EEC228A1265300578C60 /* PasswordField.swift */; };
 		5BC0847928B24BBF004B9C0F /* ProductCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0847828B24BBF004B9C0F /* ProductCategory.swift */; };
+		5BC0847C28B36604004B9C0F /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0847B28B36604004B9C0F /* String+.swift */; };
 		5BDEC26128ACAFE9001C1762 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEC26028ACAFE9001C1762 /* ImagePicker.swift */; };
 		5BDEC26328ACB206001C1762 /* AdminAddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEC26228ACB206001C1762 /* AdminAddProductView.swift */; };
 		5BE1CD6F28A17DA200657CA7 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */; };
@@ -74,6 +75,7 @@
 		5BB1EEC028A1262800578C60 /* EmailField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailField.swift; sourceTree = "<group>"; };
 		5BB1EEC228A1265300578C60 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		5BC0847828B24BBF004B9C0F /* ProductCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategory.swift; sourceTree = "<group>"; };
+		5BC0847B28B36604004B9C0F /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5BDEC26028ACAFE9001C1762 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5BDEC26228ACB206001C1762 /* AdminAddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAddProductView.swift; sourceTree = "<group>"; };
 		5BE1CD6E28A17DA200657CA7 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -108,9 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				5B63571A28A2DB55006085E3 /* AuthService.swift */,
+				5BAB452C28A814BA002D43A7 /* SessionManager.swift */,
 				5BAB451D28A3D40F002D43A7 /* DatabaseService.swift */,
 				5BB1723B28B0FB0D00439321 /* StorageService.swift */,
-				5BAB452C28A814BA002D43A7 /* SessionManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -144,6 +146,7 @@
 		5B8FDDA128A0310500FB72DC /* FoodDelivery */ = {
 			isa = PBXGroup;
 			children = (
+				5BC0847A28B365FA004B9C0F /* Extensions */,
 				5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */,
 				5B63571C28A2DB58006085E3 /* Services */,
 				5BEAD01C28A143BB004FDF4D /* Model */,
@@ -192,15 +195,23 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		5BC0847A28B365FA004B9C0F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5BC0847B28B36604004B9C0F /* String+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5BEAD01C28A143BB004FDF4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5BAB451B28A3D357002D43A7 /* AppUser.swift */,
 				5BEAD01828A13C8C004FDF4D /* Product.swift */,
 				5BC0847828B24BBF004B9C0F /* ProductCategory.swift */,
 				5BE1CD7228A23CB100657CA7 /* Position.swift */,
 				5BAB452828A80887002D43A7 /* Order.swift */,
 				5BAB452A28A80BFC002D43A7 /* OrderStatus.swift */,
-				5BAB451B28A3D357002D43A7 /* AppUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -311,6 +322,7 @@
 				5BEAD01928A13C8C004FDF4D /* Product.swift in Sources */,
 				5B6C560C28A9602D00D088A1 /* AdminOrdersViewModel.swift in Sources */,
 				5BDEC26328ACB206001C1762 /* AdminAddProductView.swift in Sources */,
+				5BC0847C28B36604004B9C0F /* String+.swift in Sources */,
 				5BAB452028A3F8BE002D43A7 /* ProfileViewModel.swift in Sources */,
 				5BAB451E28A3D40F002D43A7 /* DatabaseService.swift in Sources */,
 				5BEAD01528A13B71004FDF4D /* CartView.swift in Sources */,

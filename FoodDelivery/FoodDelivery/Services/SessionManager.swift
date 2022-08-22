@@ -23,7 +23,7 @@ class SessionManager {
             self.getUserProfile()
         }
     }
-    var userProfile: AppUser = AppUser(id: "", name: "", phone: 0, address: "")
+    var userProfile: AppUser = AppUser(id: "", name: "", phone: "", address: "")
     
     // MARK: - Private methods
     

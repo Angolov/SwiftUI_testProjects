@@ -45,7 +45,6 @@ class StorageService {
                 }
                 return
             }
-            
             completion(.success("Размер полученного изображения: \(metadata.size)"))
         }
     }
@@ -58,7 +57,6 @@ class StorageService {
                 }
                 return
             }
-            
             completion(.success(data))
         }
     }

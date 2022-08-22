@@ -25,6 +25,11 @@ class ProfileViewModel: ObservableObject {
     // MARK: - Public methods
     
     func setProfile() {
+        let phonePattern = "+* (***) ***-**-**"
+        let phoneNumber = profile.phone
+        profile.phone = phoneNumber.applyPatternOnNumbers(pattern: phonePattern,
+                                                          replacementCharacter: "*")
+        
         DatabaseService.shared.setUserProfile(for: profile) { result in
             switch result {
                 

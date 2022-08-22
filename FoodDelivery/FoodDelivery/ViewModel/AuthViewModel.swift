@@ -97,7 +97,7 @@ class AuthViewModel: ObservableObject {
     private func addUserToDatabase(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let appUser = AppUser(id: user.uid,
                               name: user.email ?? "",
-                              phone: 0,
+                              phone: "",
                               address: "")
         
         DatabaseService.shared.setUserProfile(for: appUser) { result in

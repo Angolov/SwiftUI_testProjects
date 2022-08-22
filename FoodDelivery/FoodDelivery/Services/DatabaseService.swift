@@ -70,7 +70,7 @@ class DatabaseService {
     private func parseUserFrom(data: [String : Any]) throws -> AppUser {
         guard let id = data["id"] as? String,
               let name = data["name"] as? String,
-              let phone = data["phone"] as? Int,
+              let phone = data["phone"] as? String,
               let address = data["address"] as? String
         else {
             throw DatabaseError.wrongDataEntryInFirebase
