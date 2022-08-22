@@ -146,12 +146,12 @@
 		5B8FDDA128A0310500FB72DC /* FoodDelivery */ = {
 			isa = PBXGroup;
 			children = (
-				5BC0847A28B365FA004B9C0F /* Extensions */,
 				5B8FDDA228A0310500FB72DC /* FoodDeliveryApp.swift */,
 				5B63571C28A2DB58006085E3 /* Services */,
 				5BEAD01C28A143BB004FDF4D /* Model */,
 				5BB1EEBE28A1260D00578C60 /* Views */,
 				5BEAD01F28A143E0004FDF4D /* ViewModel */,
+				5BC0847A28B365FA004B9C0F /* Extensions */,
 				5B8FDDA628A0310700FB72DC /* Assets.xcassets */,
 				5B63571128A2D55B006085E3 /* GoogleService-Info.plist */,
 				5B8FDDA828A0310700FB72DC /* Preview Content */,

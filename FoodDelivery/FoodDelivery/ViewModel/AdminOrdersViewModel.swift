@@ -18,11 +18,11 @@ class AdminOrdersViewModel: ObservableObject {
     // MARK: - Public methods
     
     func getOrders() {
-        DatabaseService.shared.getOrders(by: nil) { result in
+        DatabaseService.shared.getOrders(by: nil) { [weak self] result in
             switch result {
                 
             case .success(let orders):
-                self.orders = orders
+                self?.orders = orders.sorted { $0.date > $1.date }
             case .failure(let error):
                 print(error.localizedDescription)
             }

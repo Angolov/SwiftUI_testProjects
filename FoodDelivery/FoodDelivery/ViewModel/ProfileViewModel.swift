@@ -57,7 +57,7 @@ class ProfileViewModel: ObservableObject {
         DatabaseService.shared.getOrders(by: SessionManager.shared.userID) { [weak self] result in
             switch result {
             case .success(let orders):
-                self?.orders = orders
+                self?.orders = orders.sorted { $0.date > $1.date }
             case .failure(let error):
                 print(error.localizedDescription)
             }
